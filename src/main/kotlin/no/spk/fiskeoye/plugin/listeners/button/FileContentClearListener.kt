@@ -11,7 +11,6 @@ internal class FileContentClearListener(private val fileContentPanel: FileConten
             excludeButton.isSelected = false
             excludeField.text = ""
             caseSensitiveButton.isSelected = false
-            sortByCombobox.selectedIndex = 0
             mainTable.clear()
             includeField.requestFocus()
         }

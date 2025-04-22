@@ -10,7 +10,6 @@ internal class FilenameClearListener(private val filenamePanel: FilenamePanel) :
             includeField.text = ""
             caseSensitiveButton.isSelected = false
             searchInFullPathButton.isSelected = false
-            sortByCombobox.selectedIndex = 0
             mainTable.clear()
             includeField.requestFocus()
         }

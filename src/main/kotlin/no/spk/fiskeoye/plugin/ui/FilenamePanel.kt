@@ -11,7 +11,6 @@ import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons
 import no.spk.fiskeoye.plugin.listeners.button.FilenameClearListener
 import no.spk.fiskeoye.plugin.listeners.button.FilenameSearchListener
 import no.spk.fiskeoye.plugin.listeners.toggle.ToggleKeyListener
-import javax.swing.JComboBox
 import javax.swing.JToggleButton
 
 internal class FilenamePanel : FiskeoyePanel() {
@@ -20,7 +19,6 @@ internal class FilenamePanel : FiskeoyePanel() {
     internal val includeField: JBTextField
     internal val caseSensitiveButton: JToggleButton
     internal val searchInFullPathButton: JToggleButton
-    internal val sortByCombobox: JComboBox<String>
     internal val urlLabel: JBLabel
 
     init {
@@ -35,7 +33,6 @@ internal class FilenamePanel : FiskeoyePanel() {
             toolTipText = "Search in full path"
             addKeyListener(ToggleKeyListener(this))
         }
-        this.sortByCombobox = buildSortByComboBox()
         this.urlLabel = buildUrlLabel()
 
         val searchButton = buildSeachButton(FilenameSearchListener(this))
@@ -45,7 +42,6 @@ internal class FilenamePanel : FiskeoyePanel() {
             add(CustomFiskeoyeAction(includeField))
             add(CustomFiskeoyeAction(caseSensitiveButton))
             add(CustomFiskeoyeAction(searchInFullPathButton))
-            add(CustomFiskeoyeAction(sortByCombobox))
             add(CustomFiskeoyeAction(searchButton))
             add(CustomFiskeoyeAction(clearButton))
         }

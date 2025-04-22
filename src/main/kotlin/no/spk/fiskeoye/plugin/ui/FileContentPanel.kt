@@ -11,7 +11,6 @@ import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons
 import no.spk.fiskeoye.plugin.listeners.button.FileContentClearListener
 import no.spk.fiskeoye.plugin.listeners.button.FileContentSearchListener
 import no.spk.fiskeoye.plugin.listeners.toggle.ToggleKeyListener
-import javax.swing.JComboBox
 import javax.swing.JToggleButton
 
 internal class FileContentPanel : FiskeoyePanel() {
@@ -21,7 +20,6 @@ internal class FileContentPanel : FiskeoyePanel() {
     internal val excludeButton: JToggleButton
     internal val excludeField: JBTextField
     internal val caseSensitiveButton: JToggleButton
-    internal val sortByCombobox: JComboBox<String>
     internal val urlLabel: JBLabel
 
     init {
@@ -37,7 +35,6 @@ internal class FileContentPanel : FiskeoyePanel() {
         }
         this.excludeField = buildTextField(30, FileContentSearchListener(this))
         this.caseSensitiveButton = buildCaseSensitiveButton()
-        this.sortByCombobox = buildSortByComboBox()
         this.urlLabel = buildUrlLabel()
 
         val searchButton = buildSeachButton(FileContentSearchListener(this))
@@ -48,7 +45,6 @@ internal class FileContentPanel : FiskeoyePanel() {
             add(CustomFiskeoyeAction(excludeButton))
             add(CustomFiskeoyeAction(excludeField))
             add(CustomFiskeoyeAction(caseSensitiveButton))
-            add(CustomFiskeoyeAction(sortByCombobox))
             add(CustomFiskeoyeAction(searchButton))
             add(CustomFiskeoyeAction(clearButton))
         }
