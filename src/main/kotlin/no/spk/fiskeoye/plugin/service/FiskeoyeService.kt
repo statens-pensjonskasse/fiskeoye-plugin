@@ -1,7 +1,6 @@
 package no.spk.fiskeoye.plugin.service
 
 import com.intellij.openapi.diagnostic.Logger
-import no.spk.fiskeoye.plugin.enum.SortBy
 import no.spk.fiskeoye.plugin.service.api.FileContentRequest
 import no.spk.fiskeoye.plugin.service.api.FilenameRequest
 import no.spk.fiskeoye.plugin.service.api.FiskeoyeRequest
@@ -21,20 +20,18 @@ internal object FiskeoyeService {
         includeText: String,
         isExclude: Boolean,
         excludeText: String,
-        isCaseSensitive: Boolean,
-        sortBy: SortBy
+        isCaseSensitive: Boolean
     ): Pair<String, List<Element>?> {
-        val request = FileContentRequest(includeText, isExclude, excludeText, isCaseSensitive, sortBy)
+        val request = FileContentRequest(includeText, isExclude, excludeText, isCaseSensitive)
         return send(request) { it.hasAttr("class") && ID == it.className() && it.children().isNotEmpty() }
     }
 
     internal fun getFilename(
         includeText: String,
         isCaseSensitive: Boolean,
-        isSearchInFullPath: Boolean,
-        sortBy: SortBy
+        isSearchInFullPath: Boolean
     ): Pair<String, List<Element>?> {
-        val request = FilenameRequest(includeText, isCaseSensitive, isSearchInFullPath, sortBy)
+        val request = FilenameRequest(includeText, isCaseSensitive, isSearchInFullPath)
         return send(request) { it.hasAttr("href") && it.hasParent() && ID == it.parent()!!.className() }
     }
 

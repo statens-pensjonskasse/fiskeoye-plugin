@@ -4,7 +4,6 @@ import com.intellij.openapi.diagnostic.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import no.spk.fiskeoye.plugin.enum.SortBy
 import no.spk.fiskeoye.plugin.service.FiskeoyeService.getFilename
 import no.spk.fiskeoye.plugin.ui.FilenamePanel
 import no.spk.fiskeoye.plugin.util.addMessage
@@ -31,14 +30,13 @@ internal class FilenameSearchListener(private val filenamePanel: FilenamePanel) 
 
                 val isCaseSensitive = caseSensitiveButton.isSelected
                 val isSearchInFullPath = searchInFullPathButton.isSelected
-                val sortBy = SortBy.valueOf((sortByCombobox.selectedItem as String).uppercase())
 
                 if (includeText.length < 3) {
                     mainTable.addMessage(getInvalidString())
                     return@launch
                 }
 
-                val (requestUrl, elements) = supplyAsync { getFilename(includeText, isCaseSensitive, isSearchInFullPath, sortBy) }.get()
+                val (requestUrl, elements) = supplyAsync { getFilename(includeText, isCaseSensitive, isSearchInFullPath) }.get()
                 if (elements == null) {
                     mainTable.addMessage(getGeneralErrorMessage())
                     return@launch

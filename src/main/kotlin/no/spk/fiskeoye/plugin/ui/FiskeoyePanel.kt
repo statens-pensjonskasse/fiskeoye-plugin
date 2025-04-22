@@ -6,7 +6,6 @@ import com.intellij.openapi.actionSystem.ActionToolbar
 import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.actionSystem.impl.ActionToolbarImpl
 import com.intellij.openapi.project.DumbAware
-import com.intellij.openapi.ui.ComboBox
 import com.intellij.openapi.ui.JBMenuItem
 import com.intellij.openapi.ui.JBPopupMenu
 import com.intellij.openapi.ui.SimpleToolWindowPanel
@@ -19,7 +18,6 @@ import no.spk.fiskeoye.plugin.actions.window.OpenInBrowserAction
 import no.spk.fiskeoye.plugin.actions.window.ScrollToEndAction
 import no.spk.fiskeoye.plugin.actions.window.ScrollToTopAction
 import no.spk.fiskeoye.plugin.actions.window.SettingAction
-import no.spk.fiskeoye.plugin.enum.SortBy
 import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons
 import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.CopyLink
 import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.CopyLinkForJira
@@ -34,7 +32,6 @@ import java.awt.Dimension
 import java.awt.Font
 import java.awt.event.KeyListener
 import javax.swing.JButton
-import javax.swing.JComboBox
 import javax.swing.JToggleButton
 import javax.swing.ListSelectionModel
 import javax.swing.event.PopupMenuEvent
@@ -138,14 +135,6 @@ internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbA
                 val markdown = "[$text|$url]"
                 copy(markdown)
             }
-        }
-    }
-
-    protected fun buildSortByComboBox(): JComboBox<String> {
-        return ComboBox<String>().apply {
-            this.addItem(SortBy.PROJECT.value)
-            this.addItem(SortBy.REPO.value)
-            toolTipText = "Sort by"
         }
     }
 
