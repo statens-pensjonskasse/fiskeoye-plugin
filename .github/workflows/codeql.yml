@@ -1,0 +1,21 @@
+name: "CodeQL Advanced Analysis for Java/Kotlin"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '0 4 * * 2'
+
+jobs:
+  build:
+    uses: statens-pensjonskasse/github-actions-library/.github/workflows/codeql-java-kotlin.yaml@be23cfd49d01ff7cfacae8664be948308ee4f637 # v1.21.2
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+    secrets: inherit
+    with:
+      java-version: '21'
