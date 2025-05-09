@@ -1,5 +1,7 @@
 # ![fiskeoye](./src/main/resources/META-INF/pluginIcon.svg) Fiskeoye
 
+![Build](https://github.com/statens-pensjonskasse/fiskeoye-plugin/workflows/Build/badge.svg)
+
 <!-- Plugin description -->
 Simple intellij plugin that wraps the features found in fiskeoye. The plugin was developed as part of skipit at Statens Pensjonskasse.
 <!-- Plugin description end -->
