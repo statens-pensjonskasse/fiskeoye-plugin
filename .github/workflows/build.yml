@@ -57,6 +57,10 @@ jobs:
         with:
           gradle-home-cache-cleanup: true
 
+      # Change Wrapper Permissions
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
       # Set environment variables
       - name: Export Properties
         id: properties
