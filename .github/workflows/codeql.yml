@@ -11,7 +11,7 @@ on:
 jobs:
   analyze:
     name: Analyze Java/Kotlin code with CodeQL
-    runs-on: ${{ inputs.runner-tag }}
+    runs-on: ubuntu-latest
     permissions:
       security-events: write
       packages: read
@@ -32,16 +32,14 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@ff0a06e83cb2de871e5a09832bc6a81e7276941f # v3.28.18
         with:
-          languages: ${{ matrix.language }}
-          build-mode: ${{ matrix.build-mode }}
+          languages: java-kotlin
+          build-mode: manual
 
-      - name: Set up JDK ${{ inputs.java-version }}
-        if: matrix.build-mode == 'manual'
-        uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
+      - name: Setup Java
+        uses: actions/setup-java@v4
         with:
-          java-version: ${{ inputs.java-version }}
-          distribution: 'zulu'
-          cache: maven
+          distribution: zulu
+          java-version: 17
 
       - name: Compile Java/Kotlin code
         if: matrix.build-mode == 'manual'
