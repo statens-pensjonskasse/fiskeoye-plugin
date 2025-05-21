@@ -9,9 +9,8 @@ internal class TableCellMouseListener : TableCellListener(), MouseListener {
     override fun mouseClicked(e: MouseEvent) {
         if (e.clickCount != 2) return
         val table = e.component as? JTable ?: return
-        val pt = e.point
-        val col = table.columnAtPoint(pt) + 1
-        val row = table.rowAtPoint(pt)
+        val row = table.selectedRow
+        val col = table.selectedColumn + 1
         openUrl(table, row, col)
     }
 
