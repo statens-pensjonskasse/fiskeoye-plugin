@@ -30,6 +30,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     outputs:
       version: ${{ steps.properties.outputs.version }}
       changelog: ${{ steps.properties.outputs.changelog }}
@@ -98,6 +100,8 @@ jobs:
     name: Test
     needs: [ build ]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
 
       # Check out the current repository
@@ -180,6 +184,8 @@ jobs:
     name: Verify plugin
     needs: [ build ]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
 
       # Free GitHub Actions Environment Disk Space
