@@ -186,8 +186,8 @@ jobs:
       - name: Maximize Build Space
         uses: jlumbroso/free-disk-space@main
         with:
-          tool-cache: false
-          large-packages: false
+          tool-cache: true
+          large-packages: true
 
       # Check out the current repository
       - name: Fetch Sources
@@ -207,22 +207,6 @@ jobs:
       # Change Wrapper Permissions
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
-
-      # Free Disk Space (Ubuntu)
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
-        with:
-          # this might remove tools that are actually needed,
-          # when set to "true" but frees about 6 GB
-          tool-cache: true
-
-          # all of these default to true, but feel free to set to
-          # "false" if necessary for your workflow
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: true
-          swap-storage: true
 
       # Cache Plugin Verifier IDEs
       - name: Setup Plugin Verifier IDEs Cache
