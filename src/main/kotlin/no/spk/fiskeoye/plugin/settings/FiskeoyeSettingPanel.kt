@@ -10,7 +10,7 @@ import no.spk.fiskeoye.plugin.enum.FontStyle
 import java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment
 import java.awt.GridBagConstraints
 
-@Suppress("UNCHECKED_CAST")
+@Suppress("UNCHECKED_CAST", "JoinDeclarationAndAssignment")
 internal class FiskeoyeSettingPanel : FiskeoyeBaseSettingPanel() {
 
     // Appearance
@@ -43,7 +43,7 @@ internal class FiskeoyeSettingPanel : FiskeoyeBaseSettingPanel() {
                 1.0, 0.0,
                 GridBagConstraints.NORTHWEST,
                 GridBagConstraints.HORIZONTAL,
-                JBInsets(0,0,0,0),
+                JBInsets(0, 0, 0, 0),
                 0, 0
             )
         )
@@ -71,7 +71,7 @@ internal class FiskeoyeSettingPanel : FiskeoyeBaseSettingPanel() {
                 1.0, 1.0,
                 GridBagConstraints.NORTHWEST,
                 GridBagConstraints.HORIZONTAL,
-                JBInsets.emptyInsets(),
+                JBInsets(0, 0, 0, 0),
                 0, 0
             )
         )
