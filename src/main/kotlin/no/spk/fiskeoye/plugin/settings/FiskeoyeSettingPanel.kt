@@ -43,7 +43,7 @@ internal class FiskeoyeSettingPanel : FiskeoyeBaseSettingPanel() {
                 1.0, 0.0,
                 GridBagConstraints.NORTHWEST,
                 GridBagConstraints.HORIZONTAL,
-                JBInsets.emptyInsets(),
+                JBInsets(0,0,0,0),
                 0, 0
             )
         )

@@ -13,6 +13,7 @@ import no.spk.fiskeoye.plugin.listeners.button.FileContentSearchListener
 import no.spk.fiskeoye.plugin.listeners.toggle.ToggleKeyListener
 import javax.swing.JToggleButton
 
+@Suppress("JoinDeclarationAndAssignment")
 internal class FileContentPanel : FiskeoyePanel() {
 
     internal val mainTable: JBTable
