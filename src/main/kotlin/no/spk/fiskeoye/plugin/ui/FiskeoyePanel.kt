@@ -36,6 +36,7 @@ import javax.swing.JToggleButton
 import javax.swing.ListSelectionModel
 import javax.swing.event.PopupMenuEvent
 
+@Suppress("UnstableApiUsage")
 internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbAware {
 
     protected fun buildToolbar(place: String, actionGroup: ActionGroup, horizontal: Boolean = false): ActionToolbar {
