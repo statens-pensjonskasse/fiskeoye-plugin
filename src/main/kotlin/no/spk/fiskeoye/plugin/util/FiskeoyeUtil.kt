@@ -70,7 +70,7 @@ internal fun makeUrl(spec: String) = runCatching { URI(spec).toURL() }.getOrNull
 internal fun makeLabelIcon(url: String, html: String): LabelIcon {
     val urlString = url.lowercase().trim()
     return if (urlString.startsWith("http")) {
-        if (urlString.lowercase().trim().startsWith("https://github")) {
+        if (urlString.startsWith("https://github")) {
             LabelIcon(html, Github)
         } else {
             LabelIcon(html, Bitbucket)
