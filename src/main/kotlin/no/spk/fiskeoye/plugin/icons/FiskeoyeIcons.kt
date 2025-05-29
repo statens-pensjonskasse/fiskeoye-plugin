@@ -58,6 +58,12 @@ internal object FiskeoyeIcons {
     val Settings = IconLoader.getIcon("/icons/settings.svg", javaClass)
 
     @JvmField
-    var Warning = IconLoader.getIcon("/icons/warning.svg", javaClass)
+    val Warning = IconLoader.getIcon("/icons/warning.svg", javaClass)
+
+    @JvmField
+    val Bitbucket = IconLoader.getIcon("/icons/bitbucket.svg", javaClass)
+
+    @JvmField
+    val Github = IconLoader.getIcon("/icons/github.svg", javaClass)
 
 }

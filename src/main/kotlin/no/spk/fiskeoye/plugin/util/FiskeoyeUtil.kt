@@ -12,6 +12,8 @@ import com.intellij.openapi.wm.WindowManager
 import com.intellij.ui.table.JBTable
 import no.spk.fiskeoye.plugin.component.LabelIcon
 import no.spk.fiskeoye.plugin.enum.ScrollDirection
+import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.Bitbucket
+import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.Github
 import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.Warning
 import no.spk.fiskeoye.plugin.settings.FiskeoyeState
 import no.spk.fiskeoye.plugin.ui.FileContentPanel
@@ -66,8 +68,13 @@ internal fun getService() = ApplicationManager.getApplication().getService(Fiske
 internal fun makeUrl(spec: String) = runCatching { URI(spec).toURL() }.getOrNull()
 
 internal fun makeLabelIcon(url: String, html: String): LabelIcon {
-    return if (url.startsWith("http")) {
-        LabelIcon(html)
+    val urlString = url.lowercase().trim()
+    return if (urlString.startsWith("http")) {
+        if (urlString.lowercase().trim().startsWith("https://github")) {
+            LabelIcon(html, Github)
+        } else {
+            LabelIcon(html, Bitbucket)
+        }
     } else {
         LabelIcon(html, Warning, "NB! Url is broken")
     }
