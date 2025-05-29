@@ -18,6 +18,8 @@ import no.spk.fiskeoye.plugin.actions.window.OpenInBrowserAction
 import no.spk.fiskeoye.plugin.actions.window.ScrollToEndAction
 import no.spk.fiskeoye.plugin.actions.window.ScrollToTopAction
 import no.spk.fiskeoye.plugin.actions.window.SettingAction
+import no.spk.fiskeoye.plugin.component.LabelIcon
+import no.spk.fiskeoye.plugin.component.LabelIconRenderer
 import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons
 import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.CopyLink
 import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.CopyLinkForJira
@@ -59,6 +61,7 @@ internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbA
             add(ScrollToTopAction(mainTable))
             add(ScrollToEndAction(mainTable))
         }
+
     }
 
     protected fun buildTable(): JBTable {
@@ -71,6 +74,7 @@ internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbA
             intercellSpacing = Dimension()
             componentPopupMenu = buildPopupMenu(this)
             font = buildFont()
+            setDefaultRenderer(LabelIcon::class.java, LabelIconRenderer())
             setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION)
             setShowGrid(false)
             setDefaultEditor(Object::class.java, null)
@@ -94,14 +98,19 @@ internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbA
             this.add(copyLinkForMarkdown)
             val copyLinkForJira = buildCopyLinkForJira(table)
             this.add(copyLinkForJira)
+            val nothingHere = JBMenuItem("Nothing here")
+            this.add(nothingHere)
 
             this.addPopupMenuListener(object : PopupMenuListenerAdapter() {
                 override fun popupMenuWillBecomeVisible(e: PopupMenuEvent?) {
-                    copyLink.isVisible = !table.isEmpty
-                    copyLinkForMarkdown.isVisible = !table.isEmpty
-                    copyLinkForJira.isVisible = !table.isEmpty
+                    val tableIsValid = (!table.isEmpty && table.model.getValueAt(table.selectedRow, 1) != null)
+                    copyLink.isVisible = tableIsValid
+                    copyLinkForMarkdown.isVisible = tableIsValid
+                    copyLinkForJira.isVisible = tableIsValid
+                    nothingHere.isVisible = !tableIsValid
                 }
             })
+
         }
     }
 
