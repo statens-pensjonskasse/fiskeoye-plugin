@@ -10,7 +10,11 @@ import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowManager
 import com.intellij.openapi.wm.WindowManager
 import com.intellij.ui.table.JBTable
+import no.spk.fiskeoye.plugin.component.LabelIcon
 import no.spk.fiskeoye.plugin.enum.ScrollDirection
+import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.Bitbucket
+import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.Github
+import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.Warning
 import no.spk.fiskeoye.plugin.settings.FiskeoyeState
 import no.spk.fiskeoye.plugin.ui.FileContentPanel
 import no.spk.fiskeoye.plugin.ui.FilenamePanel
@@ -62,6 +66,19 @@ internal fun getProject(): Project {
 internal fun getService() = ApplicationManager.getApplication().getService(FiskeoyeState::class.java)
 
 internal fun makeUrl(spec: String) = runCatching { URI(spec).toURL() }.getOrNull()
+
+internal fun makeLabelIcon(url: String, html: String): LabelIcon {
+    val urlString = url.lowercase().trim()
+    return if (urlString.startsWith("http")) {
+        if (urlString.startsWith("https://github")) {
+            LabelIcon(html, Github)
+        } else {
+            LabelIcon(html, Bitbucket)
+        }
+    } else {
+        LabelIcon(html, Warning, "NB! Url is broken")
+    }
+}
 
 internal fun openUrlWithBrowser(url: URL) = openUrlWithBrowser(url.toURI())
 
@@ -141,7 +158,7 @@ internal fun getHeaderText(include: String, isCaseSensitive: Boolean, isSearchIn
 internal fun getDefaultModel(header: String): DefaultTableModel {
     return object : DefaultTableModel(arrayOf(header, "url", "text"), 0) {
         override fun getColumnClass(column: Int) = when (column) {
-            0 -> String::class.java
+            0 -> LabelIcon::class.java
             1 -> URL::class.java
             2 -> String::class.java
             else -> super.getColumnClass(column)

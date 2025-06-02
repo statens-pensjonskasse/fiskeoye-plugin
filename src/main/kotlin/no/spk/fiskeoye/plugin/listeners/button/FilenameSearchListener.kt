@@ -15,6 +15,7 @@ import no.spk.fiskeoye.plugin.util.getInvalidString
 import no.spk.fiskeoye.plugin.util.getService
 import no.spk.fiskeoye.plugin.util.getTruckMessage
 import no.spk.fiskeoye.plugin.util.hideColumns
+import no.spk.fiskeoye.plugin.util.makeLabelIcon
 import no.spk.fiskeoye.plugin.util.makeUrl
 import java.util.concurrent.CompletableFuture.supplyAsync
 
@@ -54,7 +55,7 @@ internal class FilenameSearchListener(private val filenamePanel: FilenamePanel) 
                         val html = "<html>${element}</html>"
                         val url = element.attr("href")
                         val text = element.text()
-                        model.addRow(arrayOf(html, makeUrl(url), text))
+                        model.addRow(arrayOf(makeLabelIcon(url, html), makeUrl(url), text))
                         count++
                     }
                 }

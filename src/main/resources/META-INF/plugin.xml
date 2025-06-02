@@ -18,16 +18,24 @@
 
     <actions>
         <action id="Fiskeoye.ShowToolWindow" class="no.spk.fiskeoye.plugin.actions.shortcut.ShowToolWindowAction">
-            <keyboard-shortcut first-keystroke="alt F10" keymap="$default"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt F10"/>
         </action>
-        <group text="Fiskeoye" id="Fiskeoye.Search" icon="no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.ToolWindow" popup="true">
-            <action id="Fiskeoye.Search.FileContent" class="no.spk.fiskeoye.plugin.actions.editor.FileContentEditorSearchAction"
-                    text="Search with File Content" anchor="first">
-            </action>
-            <action id="Fiskeoye.Search.Filename" class="no.spk.fiskeoye.plugin.actions.editor.FilenameEditorSearchAction"
-                    text="Search with File Name" anchor="last">
-            </action>
+
+        <group id="Fiskeoye.Search" icon="no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.ToolWindow"
+               text="Fiskeoye" popup="true">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </group>
+
+        <action id="Fiskeoye.Search.FileContent" class="no.spk.fiskeoye.plugin.actions.editor.FileContentEditorSearchAction"
+                text="Search with File Content">
+            <keyboard-shortcut keymap="$default" first-keystroke="alt F9" second-keystroke="C"/>
+            <add-to-group group-id="Fiskeoye.Search" anchor="first"/>
+        </action>
+
+        <action id="Fiskeoye.Search.Filename" class="no.spk.fiskeoye.plugin.actions.editor.FilenameEditorSearchAction"
+                text="Search with File Name">
+            <keyboard-shortcut keymap="$default" first-keystroke="alt F9" second-keystroke="N"/>
+            <add-to-group group-id="Fiskeoye.Search" anchor="last"/>
+        </action>
     </actions>
 </idea-plugin>

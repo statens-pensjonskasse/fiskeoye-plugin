@@ -57,6 +57,11 @@ This will result in the fiskeoye window being open (Shortcut `ALT` + `F10`), pre
 
 Double-click item in the list will result in default browser being open with the result.
 
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+This project is governed by the [SPK Open Source and Community Code of Conduct](https://github.com/statens-pensjonskasse/offentlig). Please make sure you read it.
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
