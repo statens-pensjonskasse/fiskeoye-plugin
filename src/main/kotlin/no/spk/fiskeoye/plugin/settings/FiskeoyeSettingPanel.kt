@@ -5,106 +5,82 @@ import com.intellij.ui.IdeBorderFactory
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBTextField
 import com.intellij.util.ui.FormBuilder
-import com.intellij.util.ui.JBInsets
 import no.spk.fiskeoye.plugin.enum.FontStyle
 import java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment
-import java.awt.GridBagConstraints
+import javax.swing.JPanel
 
 @Suppress("UNCHECKED_CAST", "JoinDeclarationAndAssignment")
 internal class FiskeoyeSettingPanel : FiskeoyeBaseSettingPanel() {
 
     // Appearance
-    private val fontNameCbox: ComboBox<String>
-    private val fontStyleCbox: ComboBox<String>
-    private val fontSizeCbox: ComboBox<Int>
+    private val fontNameCombobox: ComboBox<String>
+    private val fontStyleComboBox: ComboBox<String>
+    private val fontSizeComboBox: ComboBox<Int>
 
     // Configuration
     private val baseUrlTextField: JBTextField
-    private val truncSizeCbox: ComboBox<Int>
-    private val codeLengthCbox: ComboBox<Int>
+    private val truncSizeComboBox: ComboBox<Int>
+    private val codeLengthComboBox: ComboBox<Int>
 
     init {
         // Appearance
-        this.fontNameCbox = buildComboBox(getLocalGraphicsEnvironment().availableFontFamilyNames.toList()) as ComboBox<String>
-        this.fontStyleCbox = buildComboBox(FontStyle.entries.map { it.name }.toList()) as ComboBox<String>
-        this.fontSizeCbox = buildComboBox((8..26).toList()) as ComboBox<Int>
-        val fontPanel = FormBuilder.createFormBuilder()
-            .setAlignLabelOnRight(false)
-            .addLabeledComponent(JBLabel("Font:"), fontNameCbox, 1, false)
-            .addLabeledComponent(JBLabel("Style:"), fontStyleCbox, 1, false)
-            .addLabeledComponent(JBLabel("Size:"), fontSizeCbox, 1, false)
-            .panel.apply {
-                border = IdeBorderFactory.createTitledBorder("Appearance")
-            }
-        this.add(
-            fontPanel, GridBagConstraints(
-                0, 0,
-                1, 1,
-                1.0, 0.0,
-                GridBagConstraints.NORTHWEST,
-                GridBagConstraints.HORIZONTAL,
-                JBInsets(0, 0, 0, 0),
-                0, 0
-            )
-        )
+        this.fontNameCombobox = buildComboBox(getLocalGraphicsEnvironment().availableFontFamilyNames.toList()) as ComboBox<String>
+        this.fontStyleComboBox = buildComboBox(FontStyle.entries.map { it.name }.toList()) as ComboBox<String>
+        this.fontSizeComboBox = buildComboBox((8..26).toList()) as ComboBox<Int>
+        this.add(buildFontPanel(), buildGridBagConstraints(0, 0.0))
 
         // Configuration
-        this.baseUrlTextField = JBTextField().apply {
-            columns = 50
-        }
-        this.truncSizeCbox = buildComboBox(listOf(1000, 2000, 3000, 4000, 5000)) as ComboBox<Int>
-        this.codeLengthCbox = buildComboBox(listOf(200, 300, 400, 500)) as ComboBox<Int>
-
-        val configPanel = FormBuilder.createFormBuilder()
-            .setAlignLabelOnRight(false)
-            .addLabeledComponent(JBLabel("Base-url:"), baseUrlTextField, 1, false)
-            .addLabeledComponent(JBLabel("Trunc-size:"), truncSizeCbox, 1, false)
-            .addLabeledComponent(JBLabel("Code-length:"), codeLengthCbox, 1, false)
-            .panel.apply {
-                border = IdeBorderFactory.createTitledBorder("Configuration")
-            }
-
-        this.add(
-            configPanel, GridBagConstraints(
-                0, 1,
-                1, 1,
-                1.0, 1.0,
-                GridBagConstraints.NORTHWEST,
-                GridBagConstraints.HORIZONTAL,
-                JBInsets(0, 0, 0, 0),
-                0, 0
-            )
-        )
+        this.baseUrlTextField = JBTextField(50)
+        this.truncSizeComboBox = buildComboBox(listOf(1000, 2000, 3000, 4000, 5000)) as ComboBox<Int>
+        this.codeLengthComboBox = buildComboBox(listOf(200, 300, 400, 500)) as ComboBox<Int>
+        this.add(buildConfigurationPanel(), buildGridBagConstraints(1, 1.0))
     }
 
+    private fun buildFontPanel(): JPanel = FormBuilder.createFormBuilder()
+        .setAlignLabelOnRight(false)
+        .addLabeledComponent(JBLabel("Font:"), fontNameCombobox, 1, false)
+        .addLabeledComponent(JBLabel("Style:"), fontStyleComboBox, 1, false)
+        .addLabeledComponent(JBLabel("Size:"), fontSizeComboBox, 1, false)
+        .panel.apply {
+            border = IdeBorderFactory.createTitledBorder("Appearance")
+        }
+
+    private fun buildConfigurationPanel(): JPanel = FormBuilder.createFormBuilder()
+        .setAlignLabelOnRight(false)
+        .addLabeledComponent(JBLabel("Base-url:"), baseUrlTextField, 1, false)
+        .addLabeledComponent(JBLabel("Trunc-size:"), truncSizeComboBox, 1, false)
+        .addLabeledComponent(JBLabel("Code-length:"), codeLengthComboBox, 1, false)
+        .panel.apply {
+            border = IdeBorderFactory.createTitledBorder("Configuration")
+        }
+
     fun isModified(state: FiskeoyeState): Boolean {
-        // Appearance
-        val fontNameIsEqual = (fontNameCbox.model.selectedItem != state.fontName)
-        val fontStyleIsEqual = (fontStyleCbox.model.selectedItem != state.fontStyle.name)
-        val fontSizeIsEqual = (fontSizeCbox.model.selectedItem != state.fontSize)
-        // Configuration
-        val baseUrlIsEqual = (baseUrlTextField.text != state.baseUrl)
-        val truncSizeIsEqual = (truncSizeCbox.selectedItem != state.truncSize)
-        val codeLengthIsEqual = (codeLengthCbox.selectedItem != state.codeLength)
-        return (fontNameIsEqual || fontStyleIsEqual || fontSizeIsEqual || baseUrlIsEqual || truncSizeIsEqual || codeLengthIsEqual)
+        return listOf(
+            fontNameCombobox.selectedItem != state.fontName,
+            fontStyleComboBox.selectedItem != state.fontStyle.name,
+            fontSizeComboBox.selectedItem != state.fontSize,
+            baseUrlTextField.text != state.baseUrl,
+            truncSizeComboBox.selectedItem != state.truncSize,
+            codeLengthComboBox.selectedItem != state.codeLength
+        ).any { it }
     }
 
     fun apply(state: FiskeoyeState) {
-        state.fontName = fontNameCbox.model.selectedItem as String
-        state.fontStyle = FontStyle.valueOf(fontStyleCbox.model.selectedItem.toString())
-        state.fontSize = fontSizeCbox.model.selectedItem as Int
+        state.fontName = fontNameCombobox.model.selectedItem as String
+        state.fontStyle = FontStyle.valueOf(fontStyleComboBox.model.selectedItem as String)
+        state.fontSize = fontSizeComboBox.model.selectedItem as Int
         state.baseUrl = baseUrlTextField.text
-        state.truncSize = truncSizeCbox.model.selectedItem as Int
-        state.codeLength = codeLengthCbox.model.selectedItem as Int
+        state.truncSize = truncSizeComboBox.model.selectedItem as Int
+        state.codeLength = codeLengthComboBox.model.selectedItem as Int
     }
 
     fun reset(state: FiskeoyeState) {
-        fontNameCbox.model.selectedItem = state.fontName
-        fontStyleCbox.selectedItem = state.fontStyle.name
-        fontSizeCbox.selectedItem = state.fontSize
+        fontNameCombobox.model.selectedItem = state.fontName
+        fontStyleComboBox.selectedItem = state.fontStyle.name
+        fontSizeComboBox.selectedItem = state.fontSize
         baseUrlTextField.text = state.baseUrl
-        truncSizeCbox.selectedItem = state.truncSize
-        codeLengthCbox.selectedItem = state.codeLength
+        truncSizeComboBox.selectedItem = state.truncSize
+        codeLengthComboBox.selectedItem = state.codeLength
     }
 
 }
