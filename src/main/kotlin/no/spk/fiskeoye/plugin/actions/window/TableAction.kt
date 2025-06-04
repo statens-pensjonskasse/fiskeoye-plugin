@@ -1,6 +1,5 @@
 package no.spk.fiskeoye.plugin.actions.window
 
-import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.ui.table.JBTable
 import no.spk.fiskeoye.plugin.actions.FiskeoyeAction
@@ -13,11 +12,7 @@ internal abstract class TableAction(
 ) : FiskeoyeAction(toolTip, icon) {
 
     override fun update(e: AnActionEvent) {
-        super.update(e)
-        if (e.project == null) return
         e.presentation.isEnabled = table.rowCount > 0
     }
-
-    override fun getActionUpdateThread(): ActionUpdateThread = ActionUpdateThread.EDT
 
 }
