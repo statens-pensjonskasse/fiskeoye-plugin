@@ -6,6 +6,10 @@
 Simple intellij plugin that wraps the features found in fiskeoye. The plugin was developed as part of Ship-It at Statens Pensjonskasse.
 <!-- Plugin description end -->
 
+## Prerequisites
+
+IntelliJ Platform version 2023.3 or above.
+
 ## Build
 
 Clone the project
