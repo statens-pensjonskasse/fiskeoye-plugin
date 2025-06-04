@@ -1,5 +1,6 @@
 package no.spk.fiskeoye.plugin.listeners.button
 
+import com.intellij.ide.ActivityTracker
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.Task
@@ -91,7 +92,7 @@ internal class FileContentSearchListener(private val fileContentPanel: FileConte
                 mainTable.model = model
                 mainTable.hideColumns()
                 urlLabel.text = requestUrl
-                updateUI()
+                ActivityTracker.getInstance().inc()
             }
         }
     }
