@@ -32,7 +32,7 @@ repositories {
 // Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
 dependencies {
     implementation("org.jsoup:jsoup:1.20.1")
-    implementation("org.http4k:http4k-core:6.11.1.0")
+    implementation("org.http4k:http4k-core:5.47.0.0")
 
     testImplementation("io.kotest:kotest-assertions-core-jvm:5.9.1")
     testImplementation("io.kotest:kotest-runner-junit5-jvm:5.9.1")
