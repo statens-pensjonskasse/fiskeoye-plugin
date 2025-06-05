@@ -2,9 +2,9 @@ package no.spk.fiskeoye.plugin.ui
 
 import com.intellij.collaboration.ui.CollaborationToolsUIUtil.defaultButton
 import com.intellij.openapi.actionSystem.ActionGroup
+import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.ActionToolbar
 import com.intellij.openapi.actionSystem.DefaultActionGroup
-import com.intellij.openapi.actionSystem.impl.ActionToolbarImpl
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.ui.JBMenuItem
 import com.intellij.openapi.ui.JBPopupMenu
@@ -38,17 +38,10 @@ import javax.swing.JToggleButton
 import javax.swing.ListSelectionModel
 import javax.swing.event.PopupMenuEvent
 
-@Suppress("UnstableApiUsage")
 internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbAware {
 
     protected fun buildToolbar(place: String, actionGroup: ActionGroup, horizontal: Boolean = false): ActionToolbar {
-        return ActionToolbarImpl(
-            place,
-            actionGroup,
-            horizontal
-        ).apply {
-            layoutPolicy = ActionToolbar.AUTO_LAYOUT_POLICY
-            adjustTheSameSize(true)
+        return ActionManager.getInstance().createActionToolbar(place, actionGroup, horizontal).apply {
             setShowSeparatorTitles(true)
         }
     }
@@ -168,10 +161,11 @@ internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbA
         }
     }
 
+    @Suppress("UnstableApiUsage")
     protected fun buildSeachButton(fiskeoyeActionListener: FiskeoyeActionListener): JButton {
         return JButton().apply {
-            text = "Search"
             defaultButton()
+            text = "Search"
             addActionListener(fiskeoyeActionListener)
             addKeyListener(fiskeoyeActionListener)
         }

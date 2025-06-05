@@ -26,6 +26,7 @@ internal class FilenameSearchListener(private val filenamePanel: FilenamePanel) 
         val searchText = filenamePanel.includeField.text.trim()
 
         if (!isValidSearchText(searchText)) {
+            if (searchText.isEmpty()) return
             filenamePanel.mainTable.addMessage(getInvalidString())
             return
         }
