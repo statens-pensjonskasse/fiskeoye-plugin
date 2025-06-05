@@ -1,6 +1,8 @@
 # ![fiskeoye](./src/main/resources/META-INF/pluginIcon.svg) Fiskeoye
 
 [![Build](https://github.com/statens-pensjonskasse/fiskeoye-plugin/actions/workflows/build.yml/badge.svg)](https://github.com/statens-pensjonskasse/fiskeoye-plugin/actions/workflows/build.yml)
+[![Version](https://img.shields.io/jetbrains/plugin/v/27559)](https://plugins.jetbrains.com/plugin/27559-fiskeoye/versions)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/27559)](https://plugins.jetbrains.com/plugin/27559-fiskeoye)
 
 <!-- Plugin description -->
 Simple intellij plugin that wraps the features found in fiskeoye. The plugin was developed as part of Ship-It at Statens Pensjonskasse.
