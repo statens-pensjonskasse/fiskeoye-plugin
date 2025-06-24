@@ -24,15 +24,16 @@
         <group id="Fiskeoye.Search" icon="no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.ToolWindow"
                text="Fiskeoye" popup="true">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
         </group>
 
-        <action id="Fiskeoye.Search.FileContent" class="no.spk.fiskeoye.plugin.actions.editor.FileContentEditorSearchAction"
+        <action id="Fiskeoye.Search.FileContent" class="no.spk.fiskeoye.plugin.actions.search.FileContentSearchAction"
                 text="Search with File Content">
             <keyboard-shortcut keymap="$default" first-keystroke="alt F9" second-keystroke="C"/>
             <add-to-group group-id="Fiskeoye.Search" anchor="first"/>
         </action>
 
-        <action id="Fiskeoye.Search.Filename" class="no.spk.fiskeoye.plugin.actions.editor.FilenameEditorSearchAction"
+        <action id="Fiskeoye.Search.Filename" class="no.spk.fiskeoye.plugin.actions.search.FilenameSearchAction"
                 text="Search with File Name">
             <keyboard-shortcut keymap="$default" first-keystroke="alt F9" second-keystroke="N"/>
             <add-to-group group-id="Fiskeoye.Search" anchor="last"/>
