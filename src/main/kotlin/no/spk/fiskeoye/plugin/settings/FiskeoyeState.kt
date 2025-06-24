@@ -23,7 +23,7 @@ internal class FiskeoyeState : PersistentStateComponent<FiskeoyeState> {
     internal var truncSize: Int = 3000
     internal var codeLength: Int = 400
 
-    override fun getState(): FiskeoyeState = ApplicationManager.getApplication().getService(FiskeoyeState::class.java)!!
+    override fun getState(): FiskeoyeState = ApplicationManager.getApplication().getService(FiskeoyeState::class.java) ?: this
 
     override fun loadState(state: FiskeoyeState) = XmlSerializerUtil.copyBean(state, this)
 
