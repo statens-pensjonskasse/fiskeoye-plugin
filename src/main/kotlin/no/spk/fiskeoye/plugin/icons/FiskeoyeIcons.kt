@@ -66,4 +66,6 @@ internal object FiskeoyeIcons {
     @JvmField
     val Github = IconLoader.getIcon("/icons/github.svg", javaClass)
 
+    @JvmField
+    val Help = IconLoader.getIcon("/icons/help.svg", javaClass)
 }

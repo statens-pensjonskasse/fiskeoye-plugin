@@ -14,6 +14,7 @@ import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.table.JBTable
 import no.spk.fiskeoye.plugin.actions.window.AddResultToClipboardAction
+import no.spk.fiskeoye.plugin.actions.window.HelpAction
 import no.spk.fiskeoye.plugin.actions.window.OpenInBrowserAction
 import no.spk.fiskeoye.plugin.actions.window.ScrollToEndAction
 import no.spk.fiskeoye.plugin.actions.window.ScrollToTopAction
@@ -48,13 +49,13 @@ internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbA
 
     protected fun buildSubToolbar(urlLabel: JBLabel, mainTable: JBTable): DefaultActionGroup {
         return DefaultActionGroup().apply {
-            add(SettingAction())
-            add(OpenInBrowserAction(urlLabel, mainTable))
             add(AddResultToClipboardAction(urlLabel, mainTable))
+            add(OpenInBrowserAction(urlLabel, mainTable))
             add(ScrollToTopAction(mainTable))
             add(ScrollToEndAction(mainTable))
+            add(SettingAction())
+            add(HelpAction())
         }
-
     }
 
     protected fun buildTable(): JBTable {
