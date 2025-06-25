@@ -4,6 +4,18 @@
 
 ## [Unreleased]
 
+## [0.0.2] - 2025.06.25
+
+### What's Changed
+* Add badge for version and download by @mohamead in [PR #33](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/33)
+* Fix com.intellij.platform.instanceContainer.CycleInitializationException by @mohamead in [PR #41](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/41)
+* Add fiskeoye search to ProjectViewPopupMenu by @mohamead in [PR #43](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/43)
+* Add help action by @mohamead in [PR #42](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/42)
+* Bump org.jetbrains.kotlin.jvm from 2.1.21 to 2.2.0 by @dependabot in [PR #40](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/40)
+* Bump org.jsoup:jsoup from 1.20.1 to 1.21.1 by @dependabot in [PR #39](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/39)
+
+**Full Changelog**: https://github.com/statens-pensjonskasse/fiskeoye-plugin/compare/v0.0.1...v0.0.2
+
 ## [0.0.1] - 2025.06.04
 
 ### What's Changed
