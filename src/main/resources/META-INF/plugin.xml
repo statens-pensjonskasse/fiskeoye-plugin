@@ -7,7 +7,8 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow id="Fiskeoye" factoryClass="no.spk.fiskeoye.plugin.FiskeoyeToolWindowFactory"
-                    icon="no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.ToolWindow" anchor="bottom"/>
+                    icon="no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.ToolWindow" anchor="bottom"
+                    canCloseContents="true"/>
 
         <applicationConfigurable parentId="tools" id="Fiskeoye.Application.Settings"
                                  instance="no.spk.fiskeoye.plugin.settings.FiskeoyeConfigurable"
