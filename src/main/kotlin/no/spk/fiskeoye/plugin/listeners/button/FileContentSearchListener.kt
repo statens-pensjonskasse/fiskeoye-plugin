@@ -38,7 +38,7 @@ internal class FileContentSearchListener(private val fileContentPanel: FileConte
     }
 
     override fun performSearch(searchText: String) {
-        object : Task.Backgroundable(getProject(), "Searching file content using fiskeoye...", false) {
+        object : Task.Backgroundable(getProject(), "Searching file content using fiskeoye...", true) {
             override fun run(indicator: ProgressIndicator) {
                 indicator.isIndeterminate = true
 
