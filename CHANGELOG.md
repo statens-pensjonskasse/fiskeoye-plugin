@@ -4,6 +4,17 @@
 
 ## [Unreleased]
 
+## [0.0.3] - 2025.07.02
+
+### What's Changed
+* Downgrade version of kotlin by @mohamead in [PR #45](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/45)
+* Update changelog.md by @mohamead in [PR #44](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/44)
+* Add new tab action by @mohamead in [PR #47](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/47)
+* Fix java.lang.IllegalArgumentException by @mohamead in [PR #49](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/49)
+* Change canBeCancelled to true by @mohamead in [PR #50](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/50)
+
+**Full Changelog**: https://github.com/statens-pensjonskasse/fiskeoye-plugin/compare/v0.0.2...v0.0.3
+
 ## [0.0.2] - 2025.06.25
 
 ### What's Changed
