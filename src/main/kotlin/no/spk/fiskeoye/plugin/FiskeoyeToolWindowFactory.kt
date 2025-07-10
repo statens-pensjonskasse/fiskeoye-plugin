@@ -24,15 +24,13 @@ internal class FiskeoyeToolWindowFactory : ToolWindowFactory, DumbAware {
         val contentFactory: ContentFactory = ContentFactory.getInstance()
         val toolWindowEx = toolWindow as ToolWindowEx
 
-        val fileContentPanel = FileContentPanel()
-        val fileContent = contentFactory.createContent(fileContentPanel, "File Content", false).apply {
+        val fileContent = contentFactory.createContent(FileContentPanel(), "File Content", false).apply {
             isCloseable = false
             putUserData(CONTENT_TYPE_KEY, ContentType.FILE_CONTENT)
         }
         toolWindowEx.contentManager.addContent(fileContent)
 
-        val filenamePanel = FilenamePanel()
-        val filename = contentFactory.createContent(filenamePanel, "File Name", false).apply {
+        val filename = contentFactory.createContent(FilenamePanel(), "File Name", false).apply {
             isCloseable = false
             putUserData(CONTENT_TYPE_KEY, ContentType.FILENAME)
         }
@@ -48,9 +46,7 @@ internal class FiskeoyeToolWindowFactory : ToolWindowFactory, DumbAware {
                 }
             }
         })
-
-        val newTabActionGroup = buildNewTabActionGroup(toolWindow, contentFactory)
-        toolWindowEx.setTabActions(newTabActionGroup)
+        toolWindowEx.setTabActions(buildNewTabActionGroup(toolWindow, contentFactory))
     }
 
     private fun buildNewTabActionGroup(toolWindow: ToolWindow, contentFactory: ContentFactory): DefaultActionGroup {

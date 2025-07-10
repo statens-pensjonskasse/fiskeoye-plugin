@@ -3,7 +3,6 @@ package no.spk.fiskeoye.plugin.ui
 import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.ui.SimpleToolWindowPanel
 import com.intellij.ui.components.JBLabel
-import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.table.JBTable
 import no.spk.fiskeoye.plugin.actions.window.CustomFiskeoyeAction
@@ -55,7 +54,7 @@ internal class FilenamePanel : FiskeoyePanel() {
             this.toolbar = buildToolbar("FileName Sub Navigator Toolbar", subActionGroup, true).apply {
                 this.targetComponent = this@FilenamePanel
             }.component
-            this.add(JBScrollPane(mainTable))
+            this.add(buildScrollPane(mainTable))
         }
         this.add(mainPanel)
     }

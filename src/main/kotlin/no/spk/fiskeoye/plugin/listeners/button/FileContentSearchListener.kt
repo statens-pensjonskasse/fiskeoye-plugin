@@ -10,13 +10,17 @@ import no.spk.fiskeoye.plugin.util.addMessage
 import no.spk.fiskeoye.plugin.util.clear
 import no.spk.fiskeoye.plugin.util.getDefaultModel
 import no.spk.fiskeoye.plugin.util.getHeaderText
+import no.spk.fiskeoye.plugin.util.getHtml
 import no.spk.fiskeoye.plugin.util.getInvalidString
 import no.spk.fiskeoye.plugin.util.getProject
 import no.spk.fiskeoye.plugin.util.getService
 import no.spk.fiskeoye.plugin.util.getTruckMessage
 import no.spk.fiskeoye.plugin.util.hideColumns
+import no.spk.fiskeoye.plugin.util.htmlToText
 import no.spk.fiskeoye.plugin.util.makeLabelIcon
 import no.spk.fiskeoye.plugin.util.makeUrl
+import no.spk.fiskeoye.plugin.util.stringWidth
+import no.spk.fiskeoye.plugin.util.update
 import org.jsoup.nodes.Element
 import javax.swing.SwingUtilities
 import javax.swing.table.DefaultTableModel
@@ -43,6 +47,7 @@ internal class FileContentSearchListener(private val fileContentPanel: FileConte
                 indicator.isIndeterminate = true
 
                 try {
+                    maxWidth = 0
                     val searchParams = getFileContentSearchParameters()
                     val (requestUrl, elements) = getFileContent(
                         searchText,
@@ -91,6 +96,7 @@ internal class FileContentSearchListener(private val fileContentPanel: FileConte
                 mainTable.clear()
                 mainTable.model = model
                 mainTable.hideColumns()
+                mainTable.update(maxWidth)
                 urlLabel.text = requestUrl
                 ActivityTracker.getInstance().inc()
             }
@@ -133,7 +139,7 @@ internal class FileContentSearchListener(private val fileContentPanel: FileConte
             if (count >= truncSize) {
                 setColumnIdentifiers(
                     arrayOf(
-                        "<html>$headerText. ${getTruckMessage(truncSize)}</html>",
+                        getHtml("$headerText. ${getTruckMessage(truncSize)}"),
                         "url",
                         "text"
                     )
@@ -175,7 +181,9 @@ internal class FileContentSearchListener(private val fileContentPanel: FileConte
     }
 
     private fun DefaultTableModel.addTableRow(result: SearchResultEntry) {
-        val html = "<html>${result.file}:${result.line}:${result.code}</html>"
+        val html = getHtml("${result.file}:${result.line}:${result.code}")
+        val htmlWidth = fileContentPanel.mainTable.stringWidth(htmlToText(html))
+        maxWidth = checkWidth(maxWidth, htmlWidth)
 
         addRow(
             arrayOf(
