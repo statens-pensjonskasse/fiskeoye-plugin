@@ -11,6 +11,7 @@ import com.intellij.openapi.ui.JBPopupMenu
 import com.intellij.openapi.ui.SimpleToolWindowPanel
 import com.intellij.ui.PopupMenuListenerAdapter
 import com.intellij.ui.components.JBLabel
+import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.table.JBTable
 import no.spk.fiskeoye.plugin.actions.window.AddResultToClipboardAction
@@ -37,6 +38,8 @@ import java.awt.event.KeyListener
 import javax.swing.JButton
 import javax.swing.JToggleButton
 import javax.swing.ListSelectionModel
+import javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED
+import javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED
 import javax.swing.event.PopupMenuEvent
 
 internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbAware {
@@ -68,6 +71,7 @@ internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbA
             intercellSpacing = Dimension()
             componentPopupMenu = buildPopupMenu(this)
             font = buildFont()
+            autoscrolls = false
             setDefaultRenderer(LabelIcon::class.java, LabelIconRenderer())
             setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION)
             setShowGrid(false)
@@ -76,6 +80,13 @@ internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbA
             addKeyListener(TableCellKeyListener())
             putClientProperty("terminateEditOnFocusLost", true)
             resetDefaultFocusTraversalKeys()
+        }
+    }
+
+    protected fun buildScrollPane(table: JBTable): JBScrollPane {
+        return JBScrollPane(table).apply {
+            verticalScrollBarPolicy = VERTICAL_SCROLLBAR_AS_NEEDED
+            horizontalScrollBarPolicy = HORIZONTAL_SCROLLBAR_AS_NEEDED
         }
     }
 

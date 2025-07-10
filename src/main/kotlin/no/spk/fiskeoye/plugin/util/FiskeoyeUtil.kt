@@ -10,6 +10,7 @@ import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowManager
 import com.intellij.openapi.wm.WindowManager
 import com.intellij.ui.table.JBTable
+import com.intellij.ui.util.preferredHeight
 import no.spk.fiskeoye.plugin.component.LabelIcon
 import no.spk.fiskeoye.plugin.enum.ScrollDirection
 import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.Bitbucket
@@ -20,11 +21,17 @@ import no.spk.fiskeoye.plugin.ui.FileContentPanel
 import no.spk.fiskeoye.plugin.ui.FilenamePanel
 import no.spk.fiskeoye.plugin.ui.FiskeoyePanel
 import java.awt.Desktop
+import java.awt.Dimension
 import java.awt.Window
 import java.awt.datatransfer.StringSelection
 import java.net.URI
 import java.net.URL
+import javax.swing.JEditorPane
+import javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS
+import javax.swing.JTable.AUTO_RESIZE_OFF
+import javax.swing.JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS
 import javax.swing.table.DefaultTableModel
+import javax.swing.text.html.HTMLEditorKit
 
 internal fun scrollTo(table: JBTable, direction: ScrollDirection) {
     val rowIndex = when (direction) {
@@ -32,7 +39,11 @@ internal fun scrollTo(table: JBTable, direction: ScrollDirection) {
         ScrollDirection.TOP -> 0
     }
     if (table.rowCount == 0 || rowIndex > table.rowCount) return
+    if (!table.autoscrolls) {
+        table.autoscrolls = true
+    }
     table.changeSelection(rowIndex, 0, false, false)
+    table.autoscrolls = false
 }
 
 internal fun copy(textToCopy: String) {
@@ -94,6 +105,7 @@ internal fun openUrlWithBrowser(uri: URI) {
 
 internal fun JBTable.clear() {
     this.model = DefaultTableModel()
+    this.preferredSize = Dimension(0, 0)
 }
 
 internal fun JBTable.addMessage(message: String) {
@@ -111,7 +123,36 @@ internal fun JBTable.hideColumns() {
     }
 }
 
+internal fun JBTable.stringWidth(text: String): Int {
+    val fontMetrics = this.getFontMetrics(this.font)
+    return fontMetrics.stringWidth(text)
+}
+
+internal fun JBTable.update(width: Int) {
+    val rowHeight = this.rowHeight
+    val headerHeight = this.tableHeader.preferredSize.height
+    val height = headerHeight + (rowCount * rowHeight)
+
+    val parentWidth = this.parent.width
+    if (width < parentWidth) {
+        this.autoResizeMode = AUTO_RESIZE_ALL_COLUMNS
+        this.preferredHeight = height
+        return
+    }
+
+    this.autoResizeMode = AUTO_RESIZE_OFF
+    this.preferredSize = Dimension(width, height)
+}
+
 internal fun Boolean.toOnOff(): String = if (this) "on" else "off"
+
+fun htmlToText(html: String): String {
+    val editorPane = JEditorPane().apply {
+        editorKit = HTMLEditorKit()
+        text = html
+    }
+    return editorPane.document.getText(0, editorPane.document.length)
+}
 
 internal fun getHeaderText(include: String, isExcluded: Boolean, exclude: String, isCaseSensitive: Boolean): String {
     if (include.trim().isEmpty()) return ""
@@ -184,5 +225,9 @@ internal fun getInvalidString(): String {
 }
 
 internal fun getHtmlError(value: String): String {
-    return "<html><span style=\"color:red;\">$value<span><html>"
+    return "<span style=\"color:red;\">$value<span>"
+}
+
+internal fun getHtml(value: String): String {
+    return "<html>$value</html>"
 }

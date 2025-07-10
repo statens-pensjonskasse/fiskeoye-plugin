@@ -9,13 +9,17 @@ import no.spk.fiskeoye.plugin.util.addMessage
 import no.spk.fiskeoye.plugin.util.clear
 import no.spk.fiskeoye.plugin.util.getDefaultModel
 import no.spk.fiskeoye.plugin.util.getHeaderText
+import no.spk.fiskeoye.plugin.util.getHtml
 import no.spk.fiskeoye.plugin.util.getInvalidString
 import no.spk.fiskeoye.plugin.util.getProject
 import no.spk.fiskeoye.plugin.util.getService
 import no.spk.fiskeoye.plugin.util.getTruckMessage
 import no.spk.fiskeoye.plugin.util.hideColumns
+import no.spk.fiskeoye.plugin.util.htmlToText
 import no.spk.fiskeoye.plugin.util.makeLabelIcon
 import no.spk.fiskeoye.plugin.util.makeUrl
+import no.spk.fiskeoye.plugin.util.stringWidth
+import no.spk.fiskeoye.plugin.util.update
 import org.jsoup.nodes.Element
 import javax.swing.SwingUtilities
 import javax.swing.table.DefaultTableModel
@@ -40,6 +44,7 @@ internal class FilenameSearchListener(private val filenamePanel: FilenamePanel) 
                 indicator.isIndeterminate = true
 
                 try {
+                    maxWidth = 0
                     val searchParams = getFilenameSearchParameters()
                     val (requestUrl, elements) = getFilename(
                         searchText,
@@ -84,6 +89,7 @@ internal class FilenameSearchListener(private val filenamePanel: FilenamePanel) 
                 mainTable.clear()
                 mainTable.model = model
                 mainTable.hideColumns()
+                mainTable.update(maxWidth)
                 urlLabel.text = requestUrl
                 ActivityTracker.getInstance().inc()
             }
@@ -120,7 +126,7 @@ internal class FilenameSearchListener(private val filenamePanel: FilenamePanel) 
             if (count >= truncSize) {
                 setColumnIdentifiers(
                     arrayOf(
-                        "<html>$headerText. ${getTruckMessage(truncSize)}</html>",
+                        getHtml("$headerText. ${getTruckMessage(truncSize)}"),
                         "url",
                         "text"
                     )
@@ -129,7 +135,9 @@ internal class FilenameSearchListener(private val filenamePanel: FilenamePanel) 
         }
 
     private fun DefaultTableModel.addTableRow(element: Element) {
-        val html = "<html>$element</html>"
+        val html = getHtml("$element")
+        val htmlWidth = filenamePanel.mainTable.stringWidth(htmlToText(html))
+        maxWidth = checkWidth(maxWidth, htmlWidth)
         val url = element.attr("href")
         val text = element.text()
 
