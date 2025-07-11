@@ -10,6 +10,7 @@
 * Update changelog.md by @mohamead in [PR #51](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/51)
 * Add vertical scrollbar when needed by @mohamead in [PR #52](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/52)
 * Fix exception from invisible JBMenuItem in [PR #53](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/53)
+* Remove unused imports [PR #54](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/54)
 
 **Full Changelog**: https://github.com/statens-pensjonskasse/fiskeoye-plugin/compare/v0.0.3...v0.0.4
 
