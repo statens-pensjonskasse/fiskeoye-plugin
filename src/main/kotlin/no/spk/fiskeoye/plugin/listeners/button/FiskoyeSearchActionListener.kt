@@ -1,13 +1,9 @@
 package no.spk.fiskeoye.plugin.listeners.button
 
 import com.intellij.openapi.diagnostic.Logger
-import com.intellij.ui.components.JBLabel
 import com.intellij.ui.table.JBTable
-import no.spk.fiskeoye.plugin.settings.FiskeoyeState
 import no.spk.fiskeoye.plugin.util.addMessage
 import no.spk.fiskeoye.plugin.util.getGeneralErrorMessage
-import org.apache.commons.text.StringEscapeUtils.escapeHtml4
-import java.awt.Font
 import javax.swing.SwingUtilities
 
 internal abstract class FiskoyeSearchActionListener : FiskeoyeActionListener() {
