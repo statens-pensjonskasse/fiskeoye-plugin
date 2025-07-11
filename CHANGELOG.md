@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-## [0.0.4] - 2025.07.10
+## [0.0.4] - 2025.07.11
 
 ### What's Changed
 * Update changelog.md by @mohamead in [PR #51](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/51)
