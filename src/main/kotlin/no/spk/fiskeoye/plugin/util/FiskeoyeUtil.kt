@@ -29,7 +29,6 @@ import java.net.URL
 import javax.swing.JEditorPane
 import javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS
 import javax.swing.JTable.AUTO_RESIZE_OFF
-import javax.swing.JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS
 import javax.swing.table.DefaultTableModel
 import javax.swing.text.html.HTMLEditorKit
 
@@ -105,12 +104,14 @@ internal fun openUrlWithBrowser(uri: URI) {
 
 internal fun JBTable.clear() {
     this.model = DefaultTableModel()
+    this.autoResizeMode = AUTO_RESIZE_OFF
     this.preferredSize = Dimension(0, 0)
 }
 
 internal fun JBTable.addMessage(message: String) {
     this.apply {
         clear()
+        autoResizeMode = AUTO_RESIZE_ALL_COLUMNS
         model = getDefaultModel(message)
         hideColumns()
     }
@@ -213,18 +214,18 @@ internal fun getDefaultModel(header: String): DefaultTableModel {
 }
 
 internal fun getTruckMessage(maxSize: Int): String {
-    return getHtmlError("NB! Antall treff overstiger $maxSize. Resultatet er trunkert")
+    return getError("NB! Antall treff overstiger $maxSize. Resultatet er trunkert")
 }
 
 internal fun getGeneralErrorMessage(): String {
-    return getHtmlError("Ops! Ser ut som noe gikk galt! Se \"${LoggerFactory.getLogFilePath()}\" for mer info...")
+    return getHtml(getError("Ops! Ser ut som noe gikk galt! Se \"${LoggerFactory.getLogFilePath()}\" for mer info..."))
 }
 
 internal fun getInvalidString(): String {
-    return getHtmlError("Søkestrengen må være på minst tre tegn.")
+    return getHtml(getError("Søkestrengen må være på minst tre tegn."))
 }
 
-internal fun getHtmlError(value: String): String {
+internal fun getError(value: String): String {
     return "<span style=\"color:red;\">$value<span>"
 }
 

@@ -88,8 +88,6 @@ internal class FileContentSearchListener(private val fileContentPanel: FileConte
     ) {
         SwingUtilities.invokeLater {
             val headerText = buildHeaderText(searchText, searchParams, elements.size)
-            logger.info(headerText)
-
             val model = buildTableModel(headerText, elements)
 
             fileContentPanel.apply {

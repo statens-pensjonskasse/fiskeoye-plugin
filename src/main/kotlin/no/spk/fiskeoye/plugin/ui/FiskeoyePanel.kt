@@ -36,6 +36,7 @@ import java.awt.Dimension
 import java.awt.Font
 import java.awt.event.KeyListener
 import javax.swing.JButton
+import javax.swing.JTable.AUTO_RESIZE_OFF
 import javax.swing.JToggleButton
 import javax.swing.ListSelectionModel
 import javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED
@@ -72,6 +73,7 @@ internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbA
             componentPopupMenu = buildPopupMenu(this)
             font = buildFont()
             autoscrolls = false
+            autoResizeMode = AUTO_RESIZE_OFF
             setDefaultRenderer(LabelIcon::class.java, LabelIconRenderer())
             setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION)
             setShowGrid(false)
@@ -97,25 +99,30 @@ internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbA
 
     private fun buildPopupMenu(table: JBTable): JBPopupMenu {
         return JBPopupMenu().apply popupMenu@{
-            val copyLink = buildCopyLink(table)
-            this.add(copyLink)
-            val copyLinkForMarkdown = buildCopyLinkForMarkdown(table)
-            this.add(copyLinkForMarkdown)
-            val copyLinkForJira = buildCopyLinkForJira(table)
-            this.add(copyLinkForJira)
-            val nothingHere = JBMenuItem("Nothing here")
-            this.add(nothingHere)
-
             this.addPopupMenuListener(object : PopupMenuListenerAdapter() {
                 override fun popupMenuWillBecomeVisible(e: PopupMenuEvent?) {
-                    val tableIsValid = (!table.isEmpty && table.model.getValueAt(table.selectedRow, 1) != null)
-                    copyLink.isVisible = tableIsValid
-                    copyLinkForMarkdown.isVisible = tableIsValid
-                    copyLinkForJira.isVisible = tableIsValid
-                    nothingHere.isVisible = !tableIsValid
+                    removeAll()
+                    val isValid = try {
+                        val isNotEmpty = !table.isEmpty
+                        val hasData = table.selectedRow >= 0 && table.selectedRow < table.rowCount
+                        val isNotNull = table.model.getValueAt(table.selectedRow, 1) != null
+                        isNotNull && hasData && isNotEmpty
+                    } catch (e: Exception) {
+                        false
+                    }
+                    if (!isValid) {
+                        val nothingHere = JBMenuItem("Nothing here")
+                        add(nothingHere)
+                        return
+                    }
+                    val copyLink = buildCopyLink(table)
+                    add(copyLink)
+                    val copyLinkForMarkdown = buildCopyLinkForMarkdown(table)
+                    add(copyLinkForMarkdown)
+                    val copyLinkForJira = buildCopyLinkForJira(table)
+                    add(copyLinkForJira)
                 }
             })
-
         }
     }
 
@@ -174,7 +181,7 @@ internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbA
     }
 
     @Suppress("UnstableApiUsage")
-    protected fun buildSeachButton(fiskeoyeActionListener: FiskeoyeActionListener): JButton {
+    protected fun buildSearchButton(fiskeoyeActionListener: FiskeoyeActionListener): JButton {
         return JButton().apply {
             defaultButton()
             text = "Search"
