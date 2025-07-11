@@ -37,7 +37,7 @@ internal class FileContentPanel : FiskeoyePanel() {
         this.caseSensitiveButton = buildCaseSensitiveButton()
         this.urlLabel = buildUrlLabel()
 
-        val searchButton = buildSeachButton(FileContentSearchListener(this))
+        val searchButton = buildSearchButton(FileContentSearchListener(this))
         val clearButton = buildClearButton(FileContentClearListener(this))
 
         val defaultActionGroup = DefaultActionGroup().apply {

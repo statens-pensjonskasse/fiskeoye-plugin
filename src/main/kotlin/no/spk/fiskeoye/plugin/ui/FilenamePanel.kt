@@ -35,7 +35,7 @@ internal class FilenamePanel : FiskeoyePanel() {
         }
         this.urlLabel = buildUrlLabel()
 
-        val searchButton = buildSeachButton(FilenameSearchListener(this))
+        val searchButton = buildSearchButton(FilenameSearchListener(this))
         val clearButton = buildClearButton(FilenameClearListener(this))
 
         val defaultActionGroup = DefaultActionGroup().apply {

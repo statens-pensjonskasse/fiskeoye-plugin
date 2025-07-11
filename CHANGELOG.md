@@ -4,6 +4,15 @@
 
 ## [Unreleased]
 
+## [0.0.4] - 2025.07.10
+
+### What's Changed
+* Update changelog.md by @mohamead in [PR #51](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/51)
+* Add vertical scrollbar when needed by @mohamead in [PR #52](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/52)
+* Fix exception from invisible JBMenuItem in [PR #53](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/53)
+
+**Full Changelog**: https://github.com/statens-pensjonskasse/fiskeoye-plugin/compare/v0.0.3...v0.0.4
+
 ## [0.0.3] - 2025.07.02
 
 ### What's Changed
