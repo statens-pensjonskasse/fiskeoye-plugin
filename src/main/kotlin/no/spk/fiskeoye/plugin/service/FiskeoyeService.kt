@@ -20,7 +20,7 @@ internal object FiskeoyeService {
     private const val ID = "resultat_linje"
     private val cache: Cache<String, Pair<String, List<Element>?>> = Caffeine.newBuilder()
         .maximumSize(300)
-        .expireAfterWrite(Duration.ofMinutes(60))
+        .expireAfterWrite(Duration.ofMinutes(55))
         .expireAfterAccess(Duration.ofMinutes(60))
         .recordStats()
         .build()
