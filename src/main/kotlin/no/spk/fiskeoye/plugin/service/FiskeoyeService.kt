@@ -1,5 +1,7 @@
 package no.spk.fiskeoye.plugin.service
 
+import com.github.benmanes.caffeine.cache.Cache
+import com.github.benmanes.caffeine.cache.Caffeine
 import com.intellij.openapi.diagnostic.Logger
 import no.spk.fiskeoye.plugin.service.api.FileContentRequest
 import no.spk.fiskeoye.plugin.service.api.FilenameRequest
@@ -10,11 +12,18 @@ import org.http4k.core.Request
 import org.http4k.core.Status
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
+import java.time.Duration
 
 internal object FiskeoyeService {
 
     private val logger: Logger = Logger.getInstance(FiskeoyeService::class.java)
     private const val ID = "resultat_linje"
+    private val cache: Cache<String, Pair<String, List<Element>?>> = Caffeine.newBuilder()
+        .maximumSize(300)
+        .expireAfterWrite(Duration.ofMinutes(60))
+        .expireAfterAccess(Duration.ofMinutes(60))
+        .recordStats()
+        .build()
 
     internal fun getFileContent(
         includeText: String,
@@ -23,7 +32,11 @@ internal object FiskeoyeService {
         isCaseSensitive: Boolean
     ): Pair<String, List<Element>?> {
         val request = FileContentRequest(includeText, isExclude, excludeText, isCaseSensitive)
-        return send(request) { it.hasAttr("class") && ID == it.className() && it.children().isNotEmpty() }
+        val cacheKey = generateCacheKey(request, "file_content")
+
+        return cache.get(cacheKey) {
+            send(request) { it.hasAttr("class") && ID == it.className() && it.children().isNotEmpty() }
+        }
     }
 
     internal fun getFilename(
@@ -32,8 +45,14 @@ internal object FiskeoyeService {
         isSearchInFullPath: Boolean
     ): Pair<String, List<Element>?> {
         val request = FilenameRequest(includeText, isCaseSensitive, isSearchInFullPath)
-        return send(request) { it.hasAttr("href") && it.hasParent() && ID == it.parent()!!.className() }
+        val cacheKey = generateCacheKey(request, "filename")
+
+        return cache.get(cacheKey) {
+            send(request) { it.hasAttr("href") && it.hasParent() && ID == it.parent()!!.className() }
+        }
     }
+
+    private fun generateCacheKey(request: FiskeoyeRequest, type: String): String = "${type}_${request.getUrl().hashCode()}"
 
     private fun send(fiskeoyeRequest: FiskeoyeRequest, filterPredicate: (Element) -> Boolean): Pair<String, List<Element>?> {
         val url = fiskeoyeRequest.getUrl()
