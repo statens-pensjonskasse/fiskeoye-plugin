@@ -155,7 +155,7 @@ internal fun ContentFactory.createContent(fiskeoyePanel: FiskeoyePanel, title: S
     return this.createContent(fiskeoyePanel, title, false).apply {
         isCloseable = closeable
         putUserData(CONTENT_TYPE_KEY, contentType)
-    };
+    }
 }
 
 fun htmlToText(html: String): String {
