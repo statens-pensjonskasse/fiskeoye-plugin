@@ -9,9 +9,12 @@ import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowManager
 import com.intellij.openapi.wm.WindowManager
+import com.intellij.ui.content.Content
+import com.intellij.ui.content.ContentFactory
 import com.intellij.ui.table.JBTable
 import com.intellij.ui.util.preferredHeight
 import no.spk.fiskeoye.plugin.component.LabelIcon
+import no.spk.fiskeoye.plugin.enum.ContentType
 import no.spk.fiskeoye.plugin.enum.ScrollDirection
 import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.Bitbucket
 import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.Github
@@ -20,6 +23,7 @@ import no.spk.fiskeoye.plugin.settings.FiskeoyeState
 import no.spk.fiskeoye.plugin.ui.FileContentPanel
 import no.spk.fiskeoye.plugin.ui.FilenamePanel
 import no.spk.fiskeoye.plugin.ui.FiskeoyePanel
+import no.spk.fiskeoye.plugin.util.FiskeoyeKeys.CONTENT_TYPE_KEY
 import java.awt.Desktop
 import java.awt.Dimension
 import java.awt.Window
@@ -146,6 +150,13 @@ internal fun JBTable.update(width: Int) {
 }
 
 internal fun Boolean.toOnOff(): String = if (this) "on" else "off"
+
+internal fun ContentFactory.createContent(fiskeoyePanel: FiskeoyePanel, title: String, contentType: ContentType, closeable: Boolean = false): Content {
+    return this.createContent(fiskeoyePanel, title, false).apply {
+        isCloseable = closeable
+        putUserData(CONTENT_TYPE_KEY, contentType)
+    }
+}
 
 fun htmlToText(html: String): String {
     val editorPane = JEditorPane().apply {
