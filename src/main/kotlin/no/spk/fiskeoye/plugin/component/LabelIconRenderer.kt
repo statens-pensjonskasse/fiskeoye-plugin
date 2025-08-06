@@ -16,7 +16,8 @@ internal class LabelIconRenderer() : DefaultTableRenderer() {
         row: Int,
         column: Int
     ): Component? {
-        return (super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column) as JLabel).apply {
+        val label = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column) as JLabel
+        return label.apply {
             if (value is LabelIcon) {
                 setIcon(value.icon)
                 text = value.text
