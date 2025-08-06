@@ -159,7 +159,7 @@ internal class FileContentSearchListener(private val fileContentPanel: FileConte
             val rawCode = childNodes[3].toString()
 
             val code = if (rawCode.length > codeLength) {
-                rawCode.substring(0, codeLength) + "..."
+                rawCode.take(codeLength) + "..."
             } else {
                 rawCode
             }

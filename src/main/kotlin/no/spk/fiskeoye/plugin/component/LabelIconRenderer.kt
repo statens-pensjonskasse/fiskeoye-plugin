@@ -15,7 +15,7 @@ internal class LabelIconRenderer() : DefaultTableRenderer() {
         hasFocus: Boolean,
         row: Int,
         column: Int
-    ): Component? {
+    ): Component {
         return (super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column) as JLabel).apply {
             if (value is LabelIcon) {
                 setIcon(value.icon)

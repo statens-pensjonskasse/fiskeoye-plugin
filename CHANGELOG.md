@@ -4,6 +4,16 @@
 
 ## [Unreleased]
 
+## [0.0.5] - 2025-08.05
+
+### What's Changed
+* Add caching with Caffeine by @mohamead in [PR #57](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/57)
+* Bump org.jetbrains.intellij.platform from 2.6.0 to 2.7.0 by @dependabot in [PR #55](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/55)
+* Bump org.jetbrains.changelog from 2.2.1 to 2.3.0 by @dependabot in [PR #56](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/56)
+* Fix error with tab counter by @mohamead in [PR #58](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/58)
+
+**Full Changelog**: https://github.com/statens-pensjonskasse/fiskeoye-plugin/compare/v0.0.4...v0.0.5
+
 ## [0.0.4] - 2025.07.11
 
 ### What's Changed
