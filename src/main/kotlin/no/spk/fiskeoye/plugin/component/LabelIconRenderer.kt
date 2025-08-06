@@ -4,6 +4,7 @@ import org.jdesktop.swingx.renderer.DefaultTableRenderer
 import java.awt.Component
 import javax.swing.JLabel
 import javax.swing.JTable
+import javax.swing.text.StyleConstants.setIcon
 
 
 internal class LabelIconRenderer() : DefaultTableRenderer() {
@@ -15,9 +16,8 @@ internal class LabelIconRenderer() : DefaultTableRenderer() {
         hasFocus: Boolean,
         row: Int,
         column: Int
-    ): Component? {
-        val label = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column) as JLabel
-        return label.apply {
+    ): Component {
+        return (super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column) as JLabel).apply {
             if (value is LabelIcon) {
                 setIcon(value.icon)
                 text = value.text
