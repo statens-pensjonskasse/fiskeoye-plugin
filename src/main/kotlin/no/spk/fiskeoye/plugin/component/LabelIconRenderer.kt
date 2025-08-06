@@ -4,7 +4,6 @@ import org.jdesktop.swingx.renderer.DefaultTableRenderer
 import java.awt.Component
 import javax.swing.JLabel
 import javax.swing.JTable
-import javax.swing.text.StyleConstants.setIcon
 
 
 internal class LabelIconRenderer() : DefaultTableRenderer() {
