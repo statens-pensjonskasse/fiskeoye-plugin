@@ -40,6 +40,9 @@ internal object FiskeoyeIcons {
     val ScrollUp = IconLoader.getIcon("/icons/scrollUp.svg", javaClass)
 
     @JvmField
+    val Copy = IconLoader.getIcon("/icons/copy.svg", javaClass)
+
+    @JvmField
     val CopyLink = IconLoader.getIcon("/icons/link.svg", javaClass)
 
     @JvmField

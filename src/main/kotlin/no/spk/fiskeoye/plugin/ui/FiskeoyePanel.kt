@@ -5,6 +5,7 @@ import com.intellij.openapi.actionSystem.ActionGroup
 import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.ActionToolbar
 import com.intellij.openapi.actionSystem.DefaultActionGroup
+import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.ui.JBMenuItem
 import com.intellij.openapi.ui.JBPopupMenu
@@ -22,16 +23,16 @@ import no.spk.fiskeoye.plugin.actions.window.ScrollToTopAction
 import no.spk.fiskeoye.plugin.actions.window.SettingAction
 import no.spk.fiskeoye.plugin.component.LabelIcon
 import no.spk.fiskeoye.plugin.component.LabelIconRenderer
+import no.spk.fiskeoye.plugin.component.menu.CopyLinkForJiraMenuItem
+import no.spk.fiskeoye.plugin.component.menu.CopyLinkForMarkdownMenuItem
+import no.spk.fiskeoye.plugin.component.menu.CopyLinkMenuItem
+import no.spk.fiskeoye.plugin.component.menu.CopyTextMenuItem
 import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons
-import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.CopyLink
-import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.CopyLinkForJira
-import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.CopyLinkForMarkdown
 import no.spk.fiskeoye.plugin.listeners.button.FiskeoyeActionListener
 import no.spk.fiskeoye.plugin.listeners.table.TableCellKeyListener
 import no.spk.fiskeoye.plugin.listeners.table.TableCellMouseListener
 import no.spk.fiskeoye.plugin.listeners.toggle.ToggleKeyListener
 import no.spk.fiskeoye.plugin.settings.FiskeoyeState
-import no.spk.fiskeoye.plugin.util.copy
 import java.awt.Dimension
 import java.awt.Font
 import java.awt.event.KeyListener
@@ -44,6 +45,8 @@ import javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED
 import javax.swing.event.PopupMenuEvent
 
 internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbAware {
+
+    private val logger: Logger = Logger.getInstance(FiskeoyePanel::class.java)
 
     protected fun buildToolbar(place: String, actionGroup: ActionGroup, horizontal: Boolean = false): ActionToolbar {
         return ActionManager.getInstance().createActionToolbar(place, actionGroup, horizontal).apply {
@@ -108,55 +111,19 @@ internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbA
                         val isNotNull = table.model.getValueAt(table.selectedRow, 1) != null
                         isNotNull && hasData && isNotEmpty
                     } catch (e: Exception) {
+                        logger.error(e)
                         false
                     }
                     if (!isValid) {
-                        val nothingHere = JBMenuItem("Nothing here")
-                        add(nothingHere)
+                        add(JBMenuItem("Nothing here"))
                         return
                     }
-                    val copyLink = buildCopyLink(table)
-                    add(copyLink)
-                    val copyLinkForMarkdown = buildCopyLinkForMarkdown(table)
-                    add(copyLinkForMarkdown)
-                    val copyLinkForJira = buildCopyLinkForJira(table)
-                    add(copyLinkForJira)
+                    add(CopyTextMenuItem(table))
+                    add(CopyLinkMenuItem(table))
+                    add(CopyLinkForMarkdownMenuItem(table))
+                    add(CopyLinkForJiraMenuItem(table))
                 }
             })
-        }
-    }
-
-    private fun buildCopyLink(table: JBTable): JBMenuItem {
-        return JBMenuItem("Copy Link", CopyLink).apply {
-            this.addActionListener {
-                val selectedRow = table.selectedRow
-                val url = table.model.getValueAt(selectedRow, 1).toString()
-                copy(url)
-            }
-        }
-    }
-
-    private fun buildCopyLinkForMarkdown(table: JBTable): JBMenuItem {
-        return JBMenuItem("Copy Link for Markdown", CopyLinkForMarkdown).apply {
-            this.addActionListener {
-                val selectedRow = table.selectedRow
-                val url = table.model.getValueAt(selectedRow, 1).toString()
-                val text = table.model.getValueAt(selectedRow, 2).toString()
-                val markdown = "[$text]($url)"
-                copy(markdown)
-            }
-        }
-    }
-
-    private fun buildCopyLinkForJira(table: JBTable): JBMenuItem {
-        return JBMenuItem("Copy Link for Jira", CopyLinkForJira).apply {
-            this.addActionListener {
-                val selectedRow = table.selectedRow
-                val url = table.model.getValueAt(selectedRow, 1).toString()
-                val text = table.model.getValueAt(selectedRow, 2).toString()
-                val markdown = "[$text|$url]"
-                copy(markdown)
-            }
         }
     }
 
