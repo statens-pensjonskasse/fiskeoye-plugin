@@ -72,7 +72,7 @@ internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbA
             intercellSpacing = Dimension()
             componentPopupMenu = buildPopupMenu(this)
             font = buildFont()
-            autoscrolls = false
+            autoscrolls = true
             autoResizeMode = AUTO_RESIZE_OFF
             setDefaultRenderer(LabelIcon::class.java, LabelIconRenderer())
             setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION)
