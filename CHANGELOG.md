@@ -4,7 +4,27 @@
 
 ## [Unreleased]
 
-## [0.0.5] - 2025-08.05
+## [0.0.6] - 2025.08.19
+
+### What's Changed
+* Bump org.jetbrains.changelog from 2.3.0 to 2.4.0 by @dependabot[bot] in [PR #59](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/59)
+* Bump actions/checkout from 4 to 5 by @dependabot[bot] in [PR #60](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/60)
+* Bump org.jetbrains.qodana from 2025.1.1 to 2025.2.1 by @dependabot[bot] in [PR #63](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/63)
+* Bump JetBrains/qodana-action from 2025.1.1 to 2025.2.1 by @dependabot[bot] in [PR #62](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/62)
+* Bump io.kotest:kotest-assertions-core-jvm from 5.9.1 to 6.0.1 by @dependabot[bot] in [PR #70](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/70)
+* Bump actions/setup-java from 4 to 5 by @dependabot[bot] in [PR #68](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/68)
+* Update README.md [skip ci] by @andrelin in [PR #80](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/80)
+* Change autoscrolls to true by @mohamead in [PR #82](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/82)
+* Bump io.kotest:kotest-runner-junit5-jvm from 6.0.1 to 6.0.3 by @dependabot[bot] in [PR #79](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/79)
+* Bump org.jsoup:jsoup from 1.21.1 to 1.21.2 by @dependabot[bot] in [PR #71](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/71)
+* Add copyTextMenuItem to popupMenu by @mohamead in [PR #83](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/83)
+
+### New Contributors
+* @andrelin made their first contribution in [PR #80](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/80)
+
+**Full Changelog**: https://github.com/statens-pensjonskasse/fiskeoye-plugin/compare/v0.0.5...v0.0.6
+
+## [0.0.5] - 2025.08.05
 
 ### What's Changed
 * Add caching with Caffeine by @mohamead in [PR #57](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/57)
