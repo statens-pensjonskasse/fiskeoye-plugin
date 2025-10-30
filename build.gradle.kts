@@ -33,7 +33,7 @@ repositories {
 dependencies {
     implementation("org.jsoup:jsoup:1.21.2")
     implementation("org.http4k:http4k-core:5.47.0.0")
-    implementation("com.github.ben-manes.caffeine:caffeine:3.2.2")
+    implementation("com.github.ben-manes.caffeine:caffeine:3.2.3")
 
     testImplementation("io.kotest:kotest-assertions-core-jvm:6.0.4")
     testImplementation("io.kotest:kotest-runner-junit5-jvm:6.0.4")
