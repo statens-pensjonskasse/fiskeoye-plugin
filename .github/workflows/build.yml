@@ -42,7 +42,7 @@ jobs:
 
       # Set up Java environment for the next steps
       - name: Setup Java
-        uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b
+        uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165
         with:
           distribution: zulu
           java-version: 17
@@ -106,7 +106,7 @@ jobs:
 
       # Set up Java environment for the next steps
       - name: Setup Java
-        uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b
+        uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165
         with:
           distribution: zulu
           java-version: 17
@@ -165,7 +165,7 @@ jobs:
 
       # Set up Java environment for the next steps
       - name: Setup Java
-        uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b
+        uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165
         with:
           distribution: zulu
           java-version: 17
@@ -196,7 +196,7 @@ jobs:
   #
   #    # Set up Java environment for the next steps
   #    - name: Setup Java
-  #      uses: actions/setup-java@7a6d8a8234af8eb26422e24e3006232cccaa061b
+  #      uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165
   #      with:
   #        distribution: zulu
   #        java-version: 17
