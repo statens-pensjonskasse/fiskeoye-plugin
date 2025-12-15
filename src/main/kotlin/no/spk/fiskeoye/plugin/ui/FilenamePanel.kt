@@ -49,9 +49,9 @@ internal class FilenamePanel : FiskeoyePanel() {
             this.targetComponent = this@FilenamePanel
         }.component
 
-        val subActionGroup = buildSubToolbar(urlLabel, mainTable)
+        val tableActionGroup = buildTableActionGroup(urlLabel, mainTable)
         val mainPanel = SimpleToolWindowPanel(false, false).apply {
-            this.toolbar = buildToolbar("FileName Sub Navigator Toolbar", subActionGroup, true).apply {
+            this.toolbar = buildToolbar("FileName Table Navigator Toolbar", tableActionGroup, true).apply {
                 this.targetComponent = this@FilenamePanel
             }.component
             this.add(buildScrollPane(mainTable))
