@@ -30,7 +30,7 @@ internal class FileContentPanel : FiskeoyePanel() {
             selectedIcon = FiskeoyeIcons.ExclMarkSelected
             rolloverIcon = FiskeoyeIcons.ExclMarkHovered
             disabledSelectedIcon = FiskeoyeIcons.ExclMark
-            toolTipText = "Exclude"
+            toolTipText = "Inverter filter"
             addKeyListener(ToggleKeyListener(this))
         }
         this.excludeField = buildTextField(30, FileContentSearchListener(this))
@@ -52,9 +52,9 @@ internal class FileContentPanel : FiskeoyePanel() {
             this.targetComponent = this@FileContentPanel
         }.component
 
-        val subActionGroup = buildSubToolbar(urlLabel, mainTable)
+        val tableActionGroup = buildTableActionGroup(urlLabel, mainTable)
         val mainPanel = SimpleToolWindowPanel(false, false).apply {
-            this.toolbar = buildToolbar("FileContent Sub Navigator Toolbar", subActionGroup, true).apply {
+            this.toolbar = buildToolbar("FileContent Table Navigator Toolbar", tableActionGroup, true).apply {
                 this.targetComponent = this@FileContentPanel
             }.component
             this.add(buildScrollPane(mainTable))

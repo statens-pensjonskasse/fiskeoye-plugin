@@ -54,7 +54,7 @@ internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbA
         }
     }
 
-    protected fun buildSubToolbar(urlLabel: JBLabel, mainTable: JBTable): DefaultActionGroup {
+    protected fun buildTableActionGroup(urlLabel: JBLabel, mainTable: JBTable): DefaultActionGroup {
         return DefaultActionGroup().apply {
             add(AddResultToClipboardAction(urlLabel, mainTable))
             add(OpenInBrowserAction(urlLabel, mainTable))
