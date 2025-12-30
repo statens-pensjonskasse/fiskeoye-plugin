@@ -1,7 +1,6 @@
 package no.spk.fiskeoye.plugin.util
 
 import com.intellij.idea.LoggerFactory
-import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.ide.CopyPasteManager
@@ -14,10 +13,7 @@ import com.intellij.ui.content.Content
 import com.intellij.ui.content.ContentFactory
 import com.intellij.ui.table.JBTable
 import com.intellij.ui.util.preferredHeight
-import no.spk.fiskeoye.plugin.actions.window.filter.BitbucketFilterAction
 import no.spk.fiskeoye.plugin.actions.window.filter.FilterState
-import no.spk.fiskeoye.plugin.actions.window.filter.GithubFilterAction
-import no.spk.fiskeoye.plugin.actions.window.filter.WarningFilterAction
 import no.spk.fiskeoye.plugin.component.LabelIcon
 import no.spk.fiskeoye.plugin.enum.ContentType
 import no.spk.fiskeoye.plugin.enum.ScrollDirection

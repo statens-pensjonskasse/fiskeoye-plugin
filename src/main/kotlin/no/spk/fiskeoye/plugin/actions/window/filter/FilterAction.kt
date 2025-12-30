@@ -1,8 +1,6 @@
 package no.spk.fiskeoye.plugin.actions.window.filter
 
-import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.ToggleAction
-import com.intellij.openapi.project.Project
 import com.intellij.ui.table.JBTable
 import no.spk.fiskeoye.plugin.component.LabelIcon
 import no.spk.fiskeoye.plugin.icons.FiskeoyeIcons.Bitbucket

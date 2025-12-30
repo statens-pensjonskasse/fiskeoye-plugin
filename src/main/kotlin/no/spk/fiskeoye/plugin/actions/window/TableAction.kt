@@ -4,7 +4,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.ui.table.JBTable
 import no.spk.fiskeoye.plugin.actions.FiskeoyeAction
 import javax.swing.Icon
-import javax.swing.table.DefaultTableModel
 
 internal abstract class TableAction(
     open val table: JBTable,
