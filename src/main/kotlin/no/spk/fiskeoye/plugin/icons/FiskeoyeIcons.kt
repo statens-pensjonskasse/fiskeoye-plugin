@@ -74,4 +74,7 @@ internal object FiskeoyeIcons {
 
     @JvmField
     val Add = IconLoader.getIcon("/icons/add.svg", javaClass)
+
+    @JvmField
+    val Filter = IconLoader.getIcon("/icons/filter.svg", javaClass)
 }

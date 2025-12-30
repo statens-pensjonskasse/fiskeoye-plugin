@@ -86,6 +86,7 @@ internal class FilenameSearchListener(private val filenamePanel: FilenamePanel) 
             val model = buildTableModel(headerText, elements)
 
             filenamePanel.apply {
+                mainTable.putClientProperty("TABLE_MAX_WIDTH_KEY", maxWidth)
                 mainTable.clear()
                 mainTable.model = model
                 mainTable.hideColumns()
