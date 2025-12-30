@@ -13,7 +13,8 @@ internal abstract class TableCellListener {
         if (isUrlColumn(table, col)) {
             logger.info("Count: ${table.rowCount} Row: $row, Column: $col")
             if (row > table.rowCount - 1 || row < 0) return
-            val url = table.model.getValueAt(row, col) as? URL ?: return
+            val r = table.convertRowIndexToModel(row)
+            val url = table.model.getValueAt(r, col) as? URL ?: return
             openUrlWithBrowser(url)
         }
     }

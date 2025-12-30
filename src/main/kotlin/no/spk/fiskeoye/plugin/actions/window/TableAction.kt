@@ -12,7 +12,7 @@ internal abstract class TableAction(
 ) : FiskeoyeAction(toolTip, icon) {
 
     override fun update(e: AnActionEvent) {
-        e.presentation.isEnabled = table.rowCount > 0
+        e.presentation.isEnabled = !table.isEmpty
     }
 
 }

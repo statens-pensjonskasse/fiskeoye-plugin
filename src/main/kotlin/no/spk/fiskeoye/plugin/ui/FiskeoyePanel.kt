@@ -21,6 +21,7 @@ import no.spk.fiskeoye.plugin.actions.window.OpenInBrowserAction
 import no.spk.fiskeoye.plugin.actions.window.ScrollToEndAction
 import no.spk.fiskeoye.plugin.actions.window.ScrollToTopAction
 import no.spk.fiskeoye.plugin.actions.window.SettingAction
+import no.spk.fiskeoye.plugin.actions.window.filter.FilterActionGroup
 import no.spk.fiskeoye.plugin.component.LabelIcon
 import no.spk.fiskeoye.plugin.component.LabelIconRenderer
 import no.spk.fiskeoye.plugin.component.menu.CopyLinkForJiraMenuItem
@@ -60,6 +61,7 @@ internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbA
             add(OpenInBrowserAction(urlLabel, mainTable))
             add(ScrollToTopAction(mainTable))
             add(ScrollToEndAction(mainTable))
+            add(FilterActionGroup(mainTable))
             add(SettingAction())
             add(HelpAction())
         }
@@ -108,7 +110,7 @@ internal abstract class FiskeoyePanel : SimpleToolWindowPanel(true, true), DumbA
                     val isValid = try {
                         val isNotEmpty = !table.isEmpty
                         val hasData = table.selectedRow >= 0 && table.selectedRow < table.rowCount
-                        val isNotNull = table.model.getValueAt(table.selectedRow, 1) != null
+                        val isNotNull = table.selectedRow != -1 && table.model.getValueAt(table.convertRowIndexToModel(table.selectedRow), 1) != null
                         isNotNull && hasData && isNotEmpty
                     } catch (e: Exception) {
                         logger.error(e)

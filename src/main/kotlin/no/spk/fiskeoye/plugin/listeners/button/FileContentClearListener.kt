@@ -12,6 +12,7 @@ internal class FileContentClearListener(private val fileContentPanel: FileConten
             excludeField.text = ""
             caseSensitiveButton.isSelected = false
             mainTable.clear()
+            urlLabel.text = ""
             includeField.requestFocus()
         }
     }

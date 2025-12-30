@@ -11,6 +11,7 @@ internal class FilenameClearListener(private val filenamePanel: FilenamePanel) :
             caseSensitiveButton.isSelected = false
             searchInFullPathButton.isSelected = false
             mainTable.clear()
+            urlLabel.text = ""
             includeField.requestFocus()
         }
     }

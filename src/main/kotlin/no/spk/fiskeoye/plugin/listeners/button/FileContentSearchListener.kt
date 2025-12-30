@@ -91,6 +91,7 @@ internal class FileContentSearchListener(private val fileContentPanel: FileConte
             val model = buildTableModel(headerText, elements)
 
             fileContentPanel.apply {
+                mainTable.putClientProperty("TABLE_MAX_WIDTH_KEY", maxWidth)
                 mainTable.clear()
                 mainTable.model = model
                 mainTable.hideColumns()

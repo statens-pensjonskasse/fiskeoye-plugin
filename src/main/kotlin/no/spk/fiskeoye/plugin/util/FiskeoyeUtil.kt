@@ -13,6 +13,7 @@ import com.intellij.ui.content.Content
 import com.intellij.ui.content.ContentFactory
 import com.intellij.ui.table.JBTable
 import com.intellij.ui.util.preferredHeight
+import no.spk.fiskeoye.plugin.actions.window.filter.FilterState
 import no.spk.fiskeoye.plugin.component.LabelIcon
 import no.spk.fiskeoye.plugin.enum.ContentType
 import no.spk.fiskeoye.plugin.enum.ScrollDirection
@@ -110,6 +111,18 @@ internal fun JBTable.clear() {
     this.model = DefaultTableModel()
     this.autoResizeMode = AUTO_RESIZE_OFF
     this.preferredSize = Dimension(0, 0)
+    this.clearFilter()
+    this.updateUI()
+}
+
+internal fun JBTable.clearFilter() {
+    rowSorter = null
+    val filterState = this.getClientProperty("FILTER_STATE") as? FilterState
+    filterState?.apply {
+        bitbucketIsSelected = false
+        githubIsSelected = false
+        warningIsSelected = false
+    }
 }
 
 internal fun JBTable.addMessage(message: String) {
@@ -139,7 +152,7 @@ internal fun JBTable.update(width: Int) {
     val height = headerHeight + (rowCount * rowHeight)
 
     val parentWidth = this.parent.width
-    if (width < parentWidth) {
+    if (this.isEmpty || width < parentWidth) {
         this.autoResizeMode = AUTO_RESIZE_ALL_COLUMNS
         this.preferredHeight = height
         return
