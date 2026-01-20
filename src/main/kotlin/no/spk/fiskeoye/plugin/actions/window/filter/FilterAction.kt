@@ -1,5 +1,6 @@
 package no.spk.fiskeoye.plugin.actions.window.filter
 
+import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.ToggleAction
 import com.intellij.ui.table.JBTable
 import no.spk.fiskeoye.plugin.component.LabelIcon
@@ -12,6 +13,8 @@ import javax.swing.RowFilter
 import javax.swing.table.TableRowSorter
 
 abstract class FilterAction(open val filterState: FilterState, open val table: JBTable, text: String, icon: Icon) : ToggleAction(text, "", icon) {
+
+    override fun getActionUpdateThread(): ActionUpdateThread = ActionUpdateThread.BGT
 
     fun filter() {
         if (table.model.rowCount == 0) return
