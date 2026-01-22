@@ -38,7 +38,7 @@ jobs:
 
       # Check out the current repository
       - name: Fetch Sources
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       # Set up Java environment for the next steps
       - name: Setup Java
@@ -102,7 +102,7 @@ jobs:
 
       # Check out the current repository
       - name: Fetch Sources
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       # Set up Java environment for the next steps
       - name: Setup Java
@@ -161,7 +161,7 @@ jobs:
 
       # Check out current repository
       - name: Fetch Sources
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       # Set up Java environment for the next steps
       - name: Setup Java
@@ -192,7 +192,7 @@ jobs:
   #
   #    # Check out the current repository
   #    - name: Fetch Sources
-  #      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+  #      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
   #
   #    # Set up Java environment for the next steps
   #    - name: Setup Java
@@ -246,7 +246,7 @@ jobs:
 
       # Check out the current repository
       - name: Fetch Sources
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       # Remove old release drafts by using the curl request for the available releases with a draft flag
       - name: Remove Old Release Drafts
