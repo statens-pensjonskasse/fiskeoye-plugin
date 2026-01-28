@@ -7,6 +7,9 @@ import com.intellij.ui.components.JBTextField
 import com.intellij.util.ui.FormBuilder
 import no.spk.fiskeoye.plugin.enum.FontStyle
 import java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment
+import javax.swing.Box
+import javax.swing.BoxLayout
+import javax.swing.JCheckBox
 import javax.swing.JPanel
 
 @Suppress("UNCHECKED_CAST", "JoinDeclarationAndAssignment")
@@ -21,6 +24,8 @@ internal class FiskeoyeSettingPanel : FiskeoyeBaseSettingPanel() {
     private val baseUrlTextField: JBTextField
     private val truncSizeComboBox: ComboBox<Int>
     private val codeLengthComboBox: ComboBox<Int>
+    private val handleSpecialCharCheckBox: JCheckBox
+    private val specialCharTextField: JBTextField
 
     init {
         // Appearance
@@ -33,6 +38,14 @@ internal class FiskeoyeSettingPanel : FiskeoyeBaseSettingPanel() {
         this.baseUrlTextField = JBTextField(50)
         this.truncSizeComboBox = buildComboBox(listOf(1000, 2000, 3000, 4000, 5000)) as ComboBox<Int>
         this.codeLengthComboBox = buildComboBox(listOf(200, 300, 400, 500)) as ComboBox<Int>
+        this.handleSpecialCharCheckBox = JCheckBox().apply { isSelected = true }
+        this.specialCharTextField = JBTextField(46).apply {
+            text = "().{}"
+            isEnabled = handleSpecialCharCheckBox.isSelected
+        }
+        this.handleSpecialCharCheckBox.addActionListener {
+            specialCharTextField.isEnabled = handleSpecialCharCheckBox.isSelected
+        }
         this.add(buildConfigurationPanel(), buildGridBagConstraints(1, 1.0))
     }
 
@@ -50,6 +63,20 @@ internal class FiskeoyeSettingPanel : FiskeoyeBaseSettingPanel() {
         .addLabeledComponent(JBLabel("Base-url:"), baseUrlTextField, 1, false)
         .addLabeledComponent(JBLabel("Trunc-size:"), truncSizeComboBox, 1, false)
         .addLabeledComponent(JBLabel("Code-length:"), codeLengthComboBox, 1, false)
+        .addLabeledComponent(
+            JBLabel("Handle special-char:"),
+            JPanel().apply {
+                layout = BoxLayout(this, BoxLayout.X_AXIS)
+                add(handleSpecialCharCheckBox)
+                add(Box.createHorizontalStrut(5)) // spacing between components
+                add(specialCharTextField.apply {
+                    maximumSize = preferredSize
+                })
+                add(Box.createHorizontalGlue()) // Push everything to the left
+            },
+            1,
+            false
+        )
         .panel.apply {
             border = IdeBorderFactory.createTitledBorder("Configuration")
         }
@@ -61,7 +88,9 @@ internal class FiskeoyeSettingPanel : FiskeoyeBaseSettingPanel() {
             fontSizeComboBox.selectedItem != state.fontSize,
             baseUrlTextField.text != state.baseUrl,
             truncSizeComboBox.selectedItem != state.truncSize,
-            codeLengthComboBox.selectedItem != state.codeLength
+            codeLengthComboBox.selectedItem != state.codeLength,
+            handleSpecialCharCheckBox.isSelected != state.handleSpecialChar,
+            specialCharTextField.text != state.specialChar
         ).any { it }
     }
 
@@ -72,6 +101,8 @@ internal class FiskeoyeSettingPanel : FiskeoyeBaseSettingPanel() {
         state.baseUrl = baseUrlTextField.text
         state.truncSize = truncSizeComboBox.model.selectedItem as Int
         state.codeLength = codeLengthComboBox.model.selectedItem as Int
+        state.handleSpecialChar = handleSpecialCharCheckBox.isSelected
+        state.specialChar = specialCharTextField.text.replace(" ", "").toHashSet().joinToString("")
     }
 
     fun reset(state: FiskeoyeState) {
@@ -81,6 +112,9 @@ internal class FiskeoyeSettingPanel : FiskeoyeBaseSettingPanel() {
         baseUrlTextField.text = state.baseUrl
         truncSizeComboBox.selectedItem = state.truncSize
         codeLengthComboBox.selectedItem = state.codeLength
+        handleSpecialCharCheckBox.isSelected = state.handleSpecialChar
+        specialCharTextField.isEnabled = state.handleSpecialChar
+        specialCharTextField.text = state.specialChar
     }
 
 }

@@ -162,6 +162,10 @@ internal fun JBTable.update(width: Int) {
     this.preferredSize = Dimension(width, height)
 }
 
+internal fun String.handleSpecialChar(): String {
+    return this.map { char -> if (getService().specialChar.contains(char)) "[$char]" else char }.joinToString("")
+}
+
 internal fun Boolean.toOnOff(): String = if (this) "on" else "off"
 
 internal fun ContentFactory.createContent(fiskeoyePanel: FiskeoyePanel, title: String, contentType: ContentType, closeable: Boolean = false): Content {

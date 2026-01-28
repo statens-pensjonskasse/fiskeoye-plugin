@@ -2,6 +2,8 @@ package no.spk.fiskeoye.plugin.actions.search
 
 import com.intellij.openapi.actionSystem.AnActionEvent
 import no.spk.fiskeoye.plugin.util.getFileNamePanel
+import no.spk.fiskeoye.plugin.util.getService
+import no.spk.fiskeoye.plugin.util.handleSpecialChar
 
 internal class FilenameSearchAction : SearchAction() {
 
@@ -12,7 +14,11 @@ internal class FilenameSearchAction : SearchAction() {
         filenamePanel.apply {
             includeField.apply {
                 requestFocusInWindow()
-                text = selected
+                text = if (getService().handleSpecialChar) {
+                    selected.handleSpecialChar()
+                } else {
+                    selected
+                }
             }
         }
     }

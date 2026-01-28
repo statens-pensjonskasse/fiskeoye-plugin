@@ -5,7 +5,14 @@
 ## [Unreleased]
 
 ## [0.1.1] - 2026.01.20
-* Fix PluginException: `ActionUpdateThread.OLD_EDT` is deprecated and going to be removed soon by @mohamed in [PR #144](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/144)
+
+### What's Changed
+* Bump org.http4k:http4k-core from 6.25.0.0 to 6.25.1.0 by @dependabot[bot] in [PR #141](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/141)
+* Bump org.jsoup:jsoup from 1.21.2 to 1.22.1 by @dependabot[bot] in [PR #142](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/142)
+* Bump org.http4k:http4k-core from 6.25.1.0 to 6.26.0.0 by @dependabot[bot] in [PR #143](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/143)
+* Fix PluginException:  is deprecated and going to be removed soon by @mohamead in [PR #144](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/144)
+
+**Full Changelog**: https://github.com/statens-pensjonskasse/fiskeoye-plugin/compare/v0.1.0...v0.1.1
 
 ## [0.1.0] - 2025.12.30
 

@@ -25,6 +25,8 @@ internal class FiskeoyeState : PersistentStateComponent<FiskeoyeState> {
     internal var baseUrl: String = ""
     internal var truncSize: Int = 3000
     internal var codeLength: Int = 400
+    internal var handleSpecialChar: Boolean = true
+    internal var specialChar: String = "().{}"
 
     override fun getState(): FiskeoyeState {
         return try {
