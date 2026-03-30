@@ -4,8 +4,63 @@
 
 ## [Unreleased]
 
+## [0.1.2] - 2026.03.30
+
+### What's Changed
+* Bump io.kotest:kotest-assertions-core-jvm from 6.0.7 to 6.1.1 by @dependabot[bot] in [PR #152](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/152)
+* Bump io.kotest:kotest-runner-junit5-jvm from 6.0.7 to 6.1.1 by @dependabot[bot] in [PR #151](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/151)
+* Bump gradle-wrapper from 8.9 to 9.3.0 by @dependabot[bot] in [PR #150](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/150)
+* Bump org.http4k:http4k-core from 6.26.0.0 to 6.26.1.0 by @dependabot[bot] in [PR #149](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/149)
+* Bump actions/setup-java from 5.1.0 to 5.2.0 by @dependabot[bot] in [PR #148](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/148)
+* Bump actions/checkout from 6.0.1 to 6.0.2 by @dependabot[bot] in [PR #147](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/147)
+* Bump gradle-wrapper from 9.3.0 to 9.3.1 by @dependabot[bot] in [PR #158](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/158)
+* Bump io.kotest:kotest-runner-junit5-jvm from 6.1.1 to 6.1.2 by @dependabot[bot] in [PR #157](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/157)
+* Bump io.kotest:kotest-assertions-core-jvm from 6.1.1 to 6.1.2 by @dependabot[bot] in [PR #156](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/156)
+* Bump gradle/actions from 5.0.0 to 5.0.1 by @dependabot[bot] in [PR #155](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/155)
+* Bump org.jetbrains.kotlinx.kover from 0.9.4 to 0.9.6 by @dependabot[bot] in [PR #163](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/163)
+* Bump io.kotest:kotest-assertions-core-jvm from 6.1.2 to 6.1.3 by @dependabot[bot] in [PR #162](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/162)
+* Bump org.http4k:http4k-core from 6.26.1.0 to 6.27.0.0 by @dependabot[bot] in [PR #160](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/160)
+* Bump org.jetbrains.kotlin.jvm from 2.3.0 to 2.3.10 by @dependabot[bot] in [PR #161](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/161)
+* Bump org.http4k:http4k-core from 6.27.0.0 to 6.30.1.0 by @dependabot[bot] in [PR #167](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/167)
+* Bump org.jetbrains.kotlinx.kover from 0.9.6 to 0.9.7 by @dependabot[bot] in [PR #165](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/165)
+* Bump org.jetbrains.intellij.platform from 2.7.0 to 2.11.0 by @dependabot[bot] in [PR #153](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/153)
+* Bump gradle/actions from 5.0.1 to 5.0.2 by @dependabot[bot] in [PR #169](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/169)
+* Bump io.kotest:kotest-assertions-core-jvm from 6.1.3 to 6.1.4 by @dependabot[bot] in [PR #170](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/170)
+* Bump io.kotest:kotest-runner-junit5-jvm from 6.1.3 to 6.1.4 by @dependabot[bot] in [PR #171](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/171)
+* Bump actions/upload-artifact from 6.0.0 to 7.0.0 by @dependabot[bot] in [PR #172](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/172)
+* Bump org.http4k:http4k-core from 6.30.1.0 to 6.31.1.0 by @dependabot[bot] in [PR #168](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/168)
+* Bump gradle-wrapper from 9.3.1 to 9.4.0 by @dependabot[bot] in [PR #173](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/173)
+* Bump io.kotest:kotest-runner-junit5-jvm from 6.1.4 to 6.1.6 by @dependabot[bot] in [PR #178](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/178)
+* Bump org.http4k:http4k-core from 6.31.1.0 to 6.33.0.0 by @dependabot[bot] in [PR #175](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/175)
+* Bump io.kotest:kotest-runner-junit5-jvm from 6.1.6 to 6.1.7 by @dependabot[bot] in [PR #185](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/185)
+* Bump io.kotest:kotest-assertions-core-jvm from 6.1.6 to 6.1.7 by @dependabot[bot] in [PR #184](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/184)
+* Bump org.jetbrains.kotlin.jvm from 2.3.10 to 2.3.20 by @dependabot[bot] in [PR #183](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/183)
+* Bump org.http4k:http4k-core from 6.33.0.0 to 6.35.0.0 by @dependabot[bot] in [PR #182](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/182)
+* Bump JetBrains/qodana-action from 2025.3.1 to 2025.3.2 by @dependabot[bot] in [PR #181](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/181)
+* Bump org.http4k:http4k-core from 6.35.0.0 to 6.37.0.0 by @dependabot[bot] in [PR #191](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/191)
+* Bump gradle/actions from 5.0.2 to 6.0.0 by @dependabot[bot] in [PR #192](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/192)
+* Bump gradle-wrapper from 9.4.0 to 9.4.1 by @dependabot[bot] in [PR #190](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/190)
+* Bump codecov/codecov-action from 5.5.2 to 5.5.3 by @dependabot[bot] in [PR #188](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/188)
+* Bump org.jetbrains.qodana from 2025.3.1 to 2025.3.2 by @dependabot[bot] in [PR #187](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/187)
+* Bump gradle/actions from 6.0.0 to 6.0.1 by @dependabot[bot] in [PR #193](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/193)
+* Bump io.kotest:kotest-runner-junit5-jvm from 6.1.7 to 6.1.9 by @dependabot[bot] in [PR #194](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/194)
+* Bump org.jetbrains.kotlinx.kover from 0.9.7 to 0.9.8 by @dependabot[bot] in [PR #197](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/197)
+* Bump org.http4k:http4k-core from 6.37.0.0 to 6.38.0.0 by @dependabot[bot] in [PR #195](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/195)
+* Bump codecov/codecov-action from 5.5.3 to 6.0.0 by @dependabot[bot] in [PR #198](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/198)
+
+
+**Full Changelog**: https://github.com/statens-pensjonskasse/fiskeoye-plugin/compare/v0.1.1...v0.1.2
+
+
 ## [0.1.1] - 2026.01.20
-* Fix PluginException: `ActionUpdateThread.OLD_EDT` is deprecated and going to be removed soon by @mohamed in [PR #144](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/144)
+
+### What's Changed
+* Bump org.http4k:http4k-core from 6.25.0.0 to 6.25.1.0 by @dependabot[bot] in [PR #141](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/141)
+* Bump org.jsoup:jsoup from 1.21.2 to 1.22.1 by @dependabot[bot] in [PR #142](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/142)
+* Bump org.http4k:http4k-core from 6.25.1.0 to 6.26.0.0 by @dependabot[bot] in [PR #143](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/143)
+* Fix PluginException:  is deprecated and going to be removed soon by @mohamead in [PR #144](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/144)
+
+**Full Changelog**: https://github.com/statens-pensjonskasse/fiskeoye-plugin/compare/v0.1.0...v0.1.1
 
 ## [0.1.0] - 2025.12.30
 
