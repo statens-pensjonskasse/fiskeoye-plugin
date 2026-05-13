@@ -3,16 +3,18 @@ package no.spk.fiskeoye.plugin.service
 import com.github.benmanes.caffeine.cache.Cache
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.intellij.openapi.diagnostic.Logger
+import java.time.Duration
 import no.spk.fiskeoye.plugin.service.api.FileContentRequest
 import no.spk.fiskeoye.plugin.service.api.FilenameRequest
 import no.spk.fiskeoye.plugin.service.api.FiskeoyeRequest
 import org.http4k.client.JavaHttpClient
+import org.http4k.core.Credentials
 import org.http4k.core.Method
 import org.http4k.core.Request
 import org.http4k.core.Status
+import org.http4k.lens.basicAuthentication
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
-import java.time.Duration
 
 internal object FiskeoyeService {
 
@@ -60,6 +62,7 @@ internal object FiskeoyeService {
         val elements: List<Element>
         try {
             val request = Request(Method.GET, url)
+                .basicAuthentication(Credentials("fiskeoye-plugin", ""))
             val response = JavaHttpClient().invoke(request)
             if (response.status != Status.OK) {
                 logger.warn("Fiskeoye kall feiler med status : ${response.status}")
