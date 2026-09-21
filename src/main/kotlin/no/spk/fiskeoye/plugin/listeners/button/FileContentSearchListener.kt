@@ -49,19 +49,19 @@ internal class FileContentSearchListener(private val fileContentPanel: FileConte
                 try {
                     maxWidth = 0
                     val searchParams = getFileContentSearchParameters()
-                    val (requestUrl, elements) = getFileContent(
+                    val result = getFileContent(
                         searchText,
                         searchParams.isExclude,
                         searchParams.excludeText,
                         searchParams.isCaseSensitive
                     )
 
-                    if (elements == null) {
-                        showErrorMessage(fileContentPanel.mainTable)
+                    if (result.elements == null) {
+                        showErrorMessage(fileContentPanel.mainTable, result.message)
                         return
                     }
 
-                    updateUiWithResults(searchText, searchParams, requestUrl, elements)
+                    updateUiWithResults(searchText, searchParams, result.url, result.elements)
 
                 } catch (e: Exception) {
                     handleSearchError(fileContentPanel.mainTable, e)

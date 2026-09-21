@@ -3,6 +3,8 @@ package no.spk.fiskeoye.plugin.listeners.button
 import com.intellij.ide.ActivityTracker
 import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.Task
+import javax.swing.SwingUtilities
+import javax.swing.table.DefaultTableModel
 import no.spk.fiskeoye.plugin.service.FiskeoyeService.getFilename
 import no.spk.fiskeoye.plugin.ui.FilenamePanel
 import no.spk.fiskeoye.plugin.util.addMessage
@@ -21,8 +23,6 @@ import no.spk.fiskeoye.plugin.util.makeUrl
 import no.spk.fiskeoye.plugin.util.stringWidth
 import no.spk.fiskeoye.plugin.util.update
 import org.jsoup.nodes.Element
-import javax.swing.SwingUtilities
-import javax.swing.table.DefaultTableModel
 
 internal class FilenameSearchListener(private val filenamePanel: FilenamePanel) : FiskoyeSearchActionListener() {
 
@@ -46,18 +46,18 @@ internal class FilenameSearchListener(private val filenamePanel: FilenamePanel) 
                 try {
                     maxWidth = 0
                     val searchParams = getFilenameSearchParameters()
-                    val (requestUrl, elements) = getFilename(
+                    val result = getFilename(
                         searchText,
                         searchParams.isCaseSensitive,
                         searchParams.isSearchInFullPath
                     )
 
-                    if (elements == null) {
-                        showErrorMessage(filenamePanel.mainTable)
+                    if (result.elements == null) {
+                        showErrorMessage(filenamePanel.mainTable, result.message)
                         return
                     }
 
-                    updateUiWithResults(searchText, searchParams, requestUrl, elements)
+                    updateUiWithResults(searchText, searchParams, result.url, result.elements)
 
                 } catch (e: Exception) {
                     handleSearchError(filenamePanel.mainTable, e)

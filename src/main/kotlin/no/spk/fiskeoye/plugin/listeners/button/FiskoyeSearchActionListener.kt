@@ -2,9 +2,11 @@ package no.spk.fiskeoye.plugin.listeners.button
 
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.ui.table.JBTable
-import no.spk.fiskeoye.plugin.util.addMessage
-import no.spk.fiskeoye.plugin.util.getGeneralErrorMessage
 import javax.swing.SwingUtilities
+import no.spk.fiskeoye.plugin.util.addMessage
+import no.spk.fiskeoye.plugin.util.getError
+import no.spk.fiskeoye.plugin.util.getGeneralErrorMessage
+import no.spk.fiskeoye.plugin.util.getHtml
 
 internal abstract class FiskoyeSearchActionListener : FiskeoyeActionListener() {
 
@@ -15,6 +17,10 @@ internal abstract class FiskoyeSearchActionListener : FiskeoyeActionListener() {
     protected abstract fun performSearch(searchText: String)
 
     protected fun isValidSearchText(text: String): Boolean = text.isNotEmpty() && text.length >= 3
+
+    protected fun showErrorMessage(mainTable: JBTable, errorMessage: String) {
+        mainTable.addMessage(getHtml(getError(errorMessage)))
+    }
 
     protected fun showErrorMessage(mainTable: JBTable) = SwingUtilities.invokeLater {
         mainTable.addMessage(getGeneralErrorMessage())
