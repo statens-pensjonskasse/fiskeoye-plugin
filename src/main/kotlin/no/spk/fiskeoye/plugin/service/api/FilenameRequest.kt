@@ -11,7 +11,7 @@ internal data class FilenameRequest(
 ) : FiskeoyeRequest() {
 
     override fun getUrl(): String {
-        return "$fiskeoyeUrl/filenames.php?searchstring=${encode(includeText, UTF_8)}&" +
+        return "$fiskeoyeUrl/filenames?searchstring=${encode(includeText, UTF_8)}&" +
                 "cs=${isCaseSensitive.toOnOff()}&" +
                 "ufp=${isSearchInFullPath.toOnOff()}"
     }
