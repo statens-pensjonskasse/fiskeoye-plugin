@@ -12,7 +12,7 @@ internal data class FileContentRequest(
 ) : FiskeoyeRequest() {
 
     override fun getUrl(): String {
-        return "$fiskeoyeUrl/index.php?searchstring=${encode(includeText, UTF_8)}&" +
+        return "$fiskeoyeUrl?searchstring=${encode(includeText, UTF_8)}&" +
                 "negate=${isExclude.toOnOff()}&" +
                 "filterstring=${encode(excludeText, UTF_8)}&" +
                 "cs=${isCaseSensitive.toOnOff()}"
