@@ -4,6 +4,28 @@
 
 ## [Unreleased]
 
+## [0.1.6] - 2026.10.19
+
+### What's Changed
+* Bump codecov/codecov-action from 7.1.0 to 7.1.1 by @dependabot[bot] in [PR #294](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/294)
+* Bump org.http4k:http4k-core from 6.59.0.0 to 6.60.0.0 by @dependabot[bot] in [PR #293](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/293)
+* Bump com.github.ben-manes.caffeine:caffeine from 3.2.4 to 3.3.0 by @dependabot[bot] in [PR #295](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/295)
+* Bump gradle-wrapper from 9.7.1 to 9.8.0 by @dependabot[bot] in [PR #296](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/296)
+* Bump gradle/actions/setup-gradle from 6.3.0 to 6.4.0 by @dependabot[bot] in [PR #299](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/299)
+* Bump org.jetbrains.kotlinx.kover from 0.9.9 to 0.9.11 by @dependabot[bot] in [PR #300](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/300)
+* Bump org.http4k:http4k-core from 6.60.0.0 to 6.61.0.0 by @dependabot[bot] in [PR #302](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/302)
+* Bump JetBrains/qodana-action from 2026.2.1 to 2026.2.2 by @dependabot[bot] in [PR #301](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/301)
+* Bump org.jetbrains.qodana from 2026.2.1 to 2026.2.2 by @dependabot[bot] in [PR #303](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/303)
+* Bump com.github.ben-manes.caffeine:caffeine from 3.3.0 to 3.3.1 by @dependabot[bot] in [PR #307](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/307)
+* Bump gradle-wrapper from 9.8.0 to 9.8.1 by @dependabot[bot] in [PR #306](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/306)
+* Bump actions/upload-artifact from 7.0.1 to 7.0.2 by @dependabot[bot] in [PR #304](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/304)
+* Bump org.jetbrains.kotlin.jvm from 2.4.20 to 2.4.21 by @dependabot[bot] in [PR #305](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/305)
+* Update to use SHA version for JetBrains/qodana-action and jlumbroso/free-disk-space by @mohamead in [PR #308](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/308)
+* Update fiskeoye search-endpoint by @mohamead in [PR #309](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/309)
+* Fix: Remove usage of org.jdesktop.swingx.renderer.DefaultTableRenderer by @mohamead in [PR #310](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/310)
+
+**Full Changelog**: https://github.com/statens-pensjonskasse/fiskeoye-plugin/compare/v0.1.5...v0.1.6
+
 ## [0.1.5] - 2026.09.21
 
 ### What's Changed

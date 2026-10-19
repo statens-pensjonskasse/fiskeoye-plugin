@@ -16,9 +16,9 @@ internal class FiskeoyeServiceTest : DescribeSpec({
         val excludeText = ""
         val isCaseSensitive = false
 
-        val (requestUrl, elements) = getFileContent(includeTest, isExclude, excludeText, isCaseSensitive)
+        val (requestUrl, hits) = getFileContent(includeTest, isExclude, excludeText, isCaseSensitive)
         requestUrl shouldContain fiskoyeUrl
-        elements shouldNotBe null
+        hits shouldNotBe null
     }
 
     xit("getFileName()") {
@@ -26,9 +26,9 @@ internal class FiskeoyeServiceTest : DescribeSpec({
         val isCaseSensitive = false
         val isSearchInFullPath = false
 
-        val (requestUrl, elements) = getFilename(includeText, isCaseSensitive, isSearchInFullPath)
+        val (requestUrl, hits) = getFilename(includeText, isCaseSensitive, isSearchInFullPath)
         requestUrl shouldContain fiskoyeUrl
-        elements shouldNotBe null
+        hits shouldNotBe null
     }
 
 })

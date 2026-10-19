@@ -256,3 +256,12 @@ internal fun getError(value: String): String {
 internal fun getHtml(value: String): String {
     return "<html>$value</html>"
 }
+
+internal fun escapeHtml(value: String): String =
+    value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;")
+
+internal fun redText(value: String): String =
+    "<span style=\"color:red;\">${escapeHtml(value)}</span>"
+
+internal fun hitLink(url: String, text: String): String =
+    "<a href=\"${escapeHtml(url)}\">${escapeHtml(text)}</a>"
