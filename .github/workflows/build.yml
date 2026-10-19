@@ -150,7 +150,7 @@ jobs:
 
       # Free GitHub Actions Environment Disk Space
       - name: Maximize Build Space
-        uses: jlumbroso/free-disk-space@main
+        uses: jlumbroso/free-disk-space@36e9a5af4eddb91fc11aec4c6f6f79b3cc0cb523 # main
         with:
           tool-cache: true
           large-packages: true
@@ -172,7 +172,7 @@ jobs:
 
       # Run Qodana inspections
       - name: Qodana - Code Inspection
-        uses: JetBrains/qodana-action@v2026.2.2
+        uses: JetBrains/qodana-action@3e8d76ff0e0241618abd808682f426afe84bab3f # v2026.2.2
         with:
           cache-default-branch-only: true
 
@@ -185,7 +185,7 @@ jobs:
   #
   #    # Free GitHub Actions Environment Disk Space
   #    - name: Maximize Build Space
-  #      uses: jlumbroso/free-disk-space@main
+  #      uses: jlumbroso/free-disk-space@36e9a5af4eddb91fc11aec4c6f6f79b3cc0cb523 # main
   #      with:
   #        tool-cache: true
   #        large-packages: true
