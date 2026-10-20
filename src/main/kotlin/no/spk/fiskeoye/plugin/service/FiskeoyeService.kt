@@ -1,11 +1,15 @@
 package no.spk.fiskeoye.plugin.service
 
+import tools.jackson.module.kotlin.jsonMapper
+import tools.jackson.module.kotlin.kotlinModule
+import tools.jackson.module.kotlin.readValue
 import com.github.benmanes.caffeine.cache.Cache
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.intellij.openapi.diagnostic.Logger
 import java.time.Duration
 import no.spk.fiskeoye.plugin.service.api.FileContentRequest
 import no.spk.fiskeoye.plugin.service.api.FilenameRequest
+import no.spk.fiskeoye.plugin.service.api.FiskeoyeHit
 import no.spk.fiskeoye.plugin.service.api.FiskeoyeRequest
 import no.spk.fiskeoye.plugin.service.api.FiskeoyeResult
 import no.spk.fiskeoye.plugin.util.getGeneralErrorMessage
@@ -15,13 +19,11 @@ import org.http4k.core.Method
 import org.http4k.core.Request
 import org.http4k.core.Status
 import org.http4k.lens.basicAuthentication
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Element
 
 internal object FiskeoyeService {
 
     private val logger: Logger = Logger.getInstance(FiskeoyeService::class.java)
-    private const val ID = "resultat_linje"
+    private val mapper = jsonMapper { addModule(kotlinModule()) }
     private val cache: Cache<String, FiskeoyeResult> = Caffeine.newBuilder()
         .maximumSize(300)
         .expireAfterWrite(Duration.ofMinutes(55))
@@ -39,7 +41,7 @@ internal object FiskeoyeService {
         val cacheKey = generateCacheKey(request, "file_content")
 
         return cache.get(cacheKey) {
-            send(request) { it.hasAttr("class") && ID == it.className() && it.children().isNotEmpty() }
+            send(request)
         }
     }
 
@@ -52,18 +54,19 @@ internal object FiskeoyeService {
         val cacheKey = generateCacheKey(request, "filename")
 
         return cache.get(cacheKey) {
-            send(request) { it.hasAttr("href") && it.hasParent() && ID == it.parent()!!.className() }
+            send(request)
         }
     }
 
     private fun generateCacheKey(request: FiskeoyeRequest, type: String): String = "${type}_${request.getUrl().hashCode()}"
 
-    private fun send(fiskeoyeRequest: FiskeoyeRequest, filterPredicate: (Element) -> Boolean): FiskeoyeResult {
+    private fun send(fiskeoyeRequest: FiskeoyeRequest): FiskeoyeResult {
         val url = fiskeoyeRequest.getUrl()
         logger.info("Request: $url")
-        val elements: List<Element>
+        val hits: List<FiskeoyeHit>
         try {
             val request = Request(Method.GET, url)
+                .header("Accept", "application/json")
                 .basicAuthentication(Credentials("fiskeoye-plugin", ""))
             val response = JavaHttpClient().invoke(request)
             if (response.status != Status.OK) {
@@ -71,7 +74,7 @@ internal object FiskeoyeService {
                 logger.warn(message)
                 return FiskeoyeResult(url, null, message)
             }
-            elements = Jsoup.parse(response.body.toString()).allElements.filter(filterPredicate)
+            hits = mapper.readValue<List<FiskeoyeHit>>(response.bodyString())
             logger.info("Response received!")
         } catch (ex: IllegalArgumentException) {
             logger.warn(ex.message, ex)
@@ -80,7 +83,7 @@ internal object FiskeoyeService {
             logger.warn(ex.message, ex)
             return FiskeoyeResult(url, null, getGeneralErrorMessage())
         }
-        return FiskeoyeResult(url, elements, "")
+        return FiskeoyeResult(url, hits, "")
     }
 
 }

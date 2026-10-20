@@ -1,10 +1,10 @@
 package no.spk.fiskeoye.plugin.listeners.button
 
 import com.intellij.ide.ActivityTracker
-import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.Task
 import no.spk.fiskeoye.plugin.service.FiskeoyeService.getFileContent
+import no.spk.fiskeoye.plugin.service.api.FiskeoyeHit
 import no.spk.fiskeoye.plugin.ui.FileContentPanel
 import no.spk.fiskeoye.plugin.util.addMessage
 import no.spk.fiskeoye.plugin.util.clear
@@ -14,20 +14,20 @@ import no.spk.fiskeoye.plugin.util.getHtml
 import no.spk.fiskeoye.plugin.util.getInvalidString
 import no.spk.fiskeoye.plugin.util.getProject
 import no.spk.fiskeoye.plugin.util.getService
+import no.spk.fiskeoye.plugin.util.escapeHtml
 import no.spk.fiskeoye.plugin.util.getTruckMessage
+import no.spk.fiskeoye.plugin.util.hitLink
 import no.spk.fiskeoye.plugin.util.hideColumns
 import no.spk.fiskeoye.plugin.util.htmlToText
 import no.spk.fiskeoye.plugin.util.makeLabelIcon
 import no.spk.fiskeoye.plugin.util.makeUrl
+import no.spk.fiskeoye.plugin.util.redText
 import no.spk.fiskeoye.plugin.util.stringWidth
 import no.spk.fiskeoye.plugin.util.update
-import org.jsoup.nodes.Element
 import javax.swing.SwingUtilities
 import javax.swing.table.DefaultTableModel
 
 internal class FileContentSearchListener(private val fileContentPanel: FileContentPanel) : FiskoyeSearchActionListener() {
-
-    private val logger: Logger = Logger.getInstance(FileContentSearchListener::class.java)
 
     override fun operation() {
         val searchText = fileContentPanel.includeField.text.trim()
@@ -56,12 +56,12 @@ internal class FileContentSearchListener(private val fileContentPanel: FileConte
                         searchParams.isCaseSensitive
                     )
 
-                    if (result.elements == null) {
+                    if (result.hits == null) {
                         showErrorMessage(fileContentPanel.mainTable, result.message)
                         return
                     }
 
-                    updateUiWithResults(searchText, searchParams, result.url, result.elements)
+                    updateUiWithResults(searchText, searchParams, result.url, result.hits)
 
                 } catch (e: Exception) {
                     handleSearchError(fileContentPanel.mainTable, e)
@@ -84,11 +84,11 @@ internal class FileContentSearchListener(private val fileContentPanel: FileConte
         searchText: String,
         searchParams: FileContentSearchParameters,
         requestUrl: String,
-        elements: List<Element>
+        hits: List<FiskeoyeHit>
     ) {
         SwingUtilities.invokeLater {
-            val headerText = buildHeaderText(searchText, searchParams, elements.size)
-            val model = buildTableModel(headerText, elements)
+            val headerText = buildHeaderText(searchText, searchParams, hits.size)
+            val model = buildTableModel(headerText, hits)
 
             fileContentPanel.apply {
                 mainTable.putClientProperty("TABLE_MAX_WIDTH_KEY", maxWidth)
@@ -116,18 +116,18 @@ internal class FileContentSearchListener(private val fileContentPanel: FileConte
         return "$baseHeader Antall treff: $resultCount"
     }
 
-    private fun buildTableModel(headerText: String, elements: List<Element>) =
+    private fun buildTableModel(headerText: String, hits: List<FiskeoyeHit>) =
         getDefaultModel(headerText).apply {
             val service = getService()
             val truncSize = service.truncSize
             val codeLength = service.codeLength
             var count = 0
 
-            if (elements.isNotEmpty()) {
-                elements.forEach { element ->
+            if (hits.isNotEmpty()) {
+                hits.forEach { hit ->
                     if (count >= truncSize) return@forEach
 
-                    val searchResult = parseSearchElement(element, codeLength)
+                    val searchResult = toSearchResultEntry(hit, codeLength)
                     if (searchResult != null) {
                         addTableRow(searchResult)
                         count++
@@ -146,41 +146,22 @@ internal class FileContentSearchListener(private val fileContentPanel: FileConte
             }
         }
 
-    private fun parseSearchElement(element: Element, codeLength: Int): SearchResultEntry? {
-        val childNodes = element.childNodes()
+    private fun toSearchResultEntry(hit: FiskeoyeHit, codeLength: Int): SearchResultEntry {
+        val rawCode = hit.match.orEmpty()
+        val code = if (rawCode.length > codeLength) rawCode.take(codeLength) + "..." else rawCode
+        val line = hit.lineno?.toString().orEmpty()
 
-        if (childNodes.size != 4) {
-            logger.warn("Unexpected element structure: expected 4 child nodes, got ${childNodes.size}")
-            return null
-        }
-
-        return try {
-            val file = childNodes[0] as Element
-            val line = childNodes[2] as Element
-            val rawCode = childNodes[3].toString()
-
-            val code = if (rawCode.length > codeLength) {
-                rawCode.take(codeLength) + "..."
-            } else {
-                rawCode
-            }
-
-            SearchResultEntry(
-                file = file,
-                line = line,
-                code = code,
-                url = file.attr("href"),
-                displayText = "${file.text()}:${line.text()}"
-            )
-        } catch (e: ClassCastException) {
-            logger.warn("Failed to parse search element: ${e.message}")
-            showErrorMessage(fileContentPanel.mainTable)
-            null
-        }
+        return SearchResultEntry(
+            file = hit.filename,
+            line = line,
+            code = code,
+            url = hit.url,
+            displayText = "${hit.filename}:$line"
+        )
     }
 
     private fun DefaultTableModel.addTableRow(result: SearchResultEntry) {
-        val html = getHtml("${result.file}:${result.line}:${result.code}")
+        val html = getHtml("${hitLink(result.url, result.file)}:${redText(result.line)}:${escapeHtml(result.code)}")
         val htmlWidth = fileContentPanel.mainTable.stringWidth(htmlToText(html))
         maxWidth = checkWidth(maxWidth, htmlWidth)
 
@@ -200,8 +181,8 @@ internal class FileContentSearchListener(private val fileContentPanel: FileConte
     )
 
     private data class SearchResultEntry(
-        val file: Element,
-        val line: Element,
+        val file: String,
+        val line: String,
         val code: String,
         val url: String,
         val displayText: String
