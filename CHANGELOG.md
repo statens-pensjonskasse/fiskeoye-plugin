@@ -4,6 +4,16 @@
 
 ## [Unreleased]
 
+## [0.2.0] - 2026.10.20
+
+### What's Changed
+* Change from using html to json in handling response from fiskeoye-web by @mohamead in [PR #314](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/314)
+* Bump io.kotest:kotest-runner-junit5-jvm from 6.2.5 to 6.2.6 by @dependabot[bot] in [PR #313](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/313)
+* Bump actions/setup-java from 6.0.1 to 6.1.0 by @dependabot[bot] in [PR #312](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/312)
+* Bump io.kotest:kotest-assertions-core-jvm from 6.2.5 to 6.2.6 by @dependabot[bot] in [PR #311](https://github.com/statens-pensjonskasse/fiskeoye-plugin/pull/311)
+
+**Full Changelog**: https://github.com/statens-pensjonskasse/fiskeoye-plugin/compare/v0.1.6...v0.2.0
+
 ## [0.1.6] - 2026.10.19
 
 ### What's Changed

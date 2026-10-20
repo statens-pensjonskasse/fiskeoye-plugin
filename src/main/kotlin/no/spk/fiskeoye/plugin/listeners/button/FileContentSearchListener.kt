@@ -152,7 +152,7 @@ internal class FileContentSearchListener(private val fileContentPanel: FileConte
         val line = hit.lineno?.toString().orEmpty()
 
         return SearchResultEntry(
-            file = hit.filename,
+            file = "${hit.reponame}/${hit.filename}",
             line = line,
             code = code,
             url = hit.url,
