@@ -137,7 +137,7 @@ internal class FilenameSearchListener(private val filenamePanel: FilenamePanel) 
         }
 
     private fun DefaultTableModel.addTableRow(hit: FiskeoyeHit) {
-        val html = getHtml(hitLink(hit.url, hit.filename))
+        val html = getHtml(hitLink(hit.url, "${hit.reponame}/${hit.filename}"))
         val htmlWidth = filenamePanel.mainTable.stringWidth(htmlToText(html))
         maxWidth = checkWidth(maxWidth, htmlWidth)
         val url = hit.url
