@@ -31,7 +31,7 @@ repositories {
 
 // Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
 dependencies {
-    implementation("tools.jackson.module:jackson-module-kotlin:3.2.4")
+    implementation("tools.jackson.module:jackson-module-kotlin:3.3.0")
     implementation("org.http4k:http4k-core:6.61.0.0")
     implementation("com.github.ben-manes.caffeine:caffeine:3.3.1")
 
