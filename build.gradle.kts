@@ -36,7 +36,7 @@ dependencies {
     implementation("com.github.ben-manes.caffeine:caffeine:3.3.1")
 
     testImplementation("io.kotest:kotest-assertions-core-jvm:6.2.6")
-    testImplementation("io.kotest:kotest-runner-junit5-jvm:6.2.6")
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:6.2.7")
     testImplementation(libs.junit)
 
     // IntelliJ Platform Gradle Plugin Dependencies Extension - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-dependencies-extension.html
