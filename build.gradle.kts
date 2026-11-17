@@ -35,7 +35,7 @@ dependencies {
     implementation("org.http4k:http4k-core:6.61.0.0")
     implementation("com.github.ben-manes.caffeine:caffeine:3.3.1")
 
-    testImplementation("io.kotest:kotest-assertions-core-jvm:6.2.6")
+    testImplementation("io.kotest:kotest-assertions-core-jvm:6.2.7")
     testImplementation("io.kotest:kotest-runner-junit5-jvm:6.2.7")
     testImplementation(libs.junit)
 
